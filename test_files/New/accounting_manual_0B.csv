@@ -1,0 +1,131 @@
+debit_account;debit_account_description;credit_account;credit_account_description;frequency;min_amount;max_amount;acc_center;cost_center
+0B11000020;Software;0B11000380;Santander bank account;0.0005;1.00;5.00;1010;0030
+0B11000030;Trademark;0B11000390;Unicredit bank account;0.0005;1.00;5.00;1020;0030
+0B11000380;Santander bank account;0B11000020;Software;0.0005;1.00;5.00;1010;0030
+0B11000390;Unicredit bank account;0B11000030;Trademark;0.0005;1.00;5.00;1020;0030
+0B11000040;Plots;0B11000400;Intesa bank account;0.0005;10.00;50.00;1020;0030
+0B11000050;Buildings for instrumental use;0B11000400;Intesa bank account;0.0005;10.00;50.00;1020;0030
+0B11000400;Intesa bank account;0B11000040;Plots;0.0005;10.00;50.00;1020;0030
+0B11000400;Intesa bank account;0B11000050;Buildings for instrumental use;0.0005;10.00;50.00;1020;0030
+0B11000060;Phones;0B11000390;Unicredit bank account;0.0005;0.00;1.00;1010;0030
+0B11000070;Computers;0B11000400;Intesa bank account;0.0005;0.00;1.00;1010;0030
+0B11000080;Machineries;0B11000390;Unicredit bank account;0.0005;0.00;1.00;1010;0030
+0B11000090;Forniture;0B11000400;Intesa bank account;0.0005;0.00;1.00;1010;0030
+0B11000390;Unicredit bank account;0B11000060;Phones;0.0005;0.00;1.00;1010;0030
+0B11000400;Intesa bank account;0B11000070;Computers;0.0005;0.00;1.00;1010;0030
+0B11000390;Unicredit bank account;0B11000080;Machineries;0.0005;0.00;1.00;1010;0030
+0B11000400;Intesa bank account;0B11000090;Forniture;0.0005;0.00;1.00;1010;0030
+0B11000120;Buildings investments;0B11000370;Jpmorgan bank account;0.0005;25.00;100.00;1030;0020
+0B11000370;Jpmorgan bank account;0B11000120;Buildings investments;0.0005;25.00;100.00;1030;0020
+0B49000010;Premiums ceded;0B11000400;Intesa bank account;0.001;1,000.00;1,500.00;1040;0010
+0B11000100;Mathematical reserves reinsurance;0B59000180;Change in mathematical reserves reinsurance;0.001;1,000.00;1,500.00;1050;0010
+0B59000190;Change in claims to be paid reserve reinsurance;0B11000110;Claims to be paid reserve reinsurance;0.0005;400.00;500.00;1050;0010
+0B11000110;Claims to be paid reserve reinsurance;0B59000190;Change in claims to be paid reserve reinsurance;0.0005;400.00;500.00;1050;0010
+0B11000140;Euro government bonds AC;0B59000150;Valuation gains on AC assets;0.0005;500.00;1,000.00;1030;0020
+0B11000150;Euro high yield bonds AC;0B59000150;Valuation gains on AC assets;0.0005;500.00;1,000.00;1030;0020
+0B49000210;Valuation losses on AC assets;0B11000140;Euro government bonds AC;0.0005;500.00;1,000.00;1030;0020
+0B49000210;Valuation losses on AC assets;0B11000150;Euro high yield bonds AC;0.0005;500.00;1,000.00;1030;0020
+0B11000160;Euro government bonds FVTOCI;0B21000050;FVTOCI reserve;0.0005;500.00;1,000.00;1030;0020
+0B11000170;Euro high yield bonds FVTOCI;0B21000050;FVTOCI reserve;0.0005;500.00;1,000.00;1030;0020
+0B21000050;FVTOCI reserve;0B11000160;Euro government bonds FVTOCI;0.0005;500.00;1,000.00;1030;0020
+0B21000050;FVTOCI reserve;0B11000170;Euro high yield bonds FVTOCI;0.0005;500.00;1,000.00;1030;0020
+0B11000180;Euroequity fund dynamic;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000190;Eurobond fund balanced;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000200;Eurobond fund opportunity;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000210;Country fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000220;Opportunity fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000230;Sector fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000250;Equity step fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000260;Bond short term fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000270;Stability fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000280;Challenge fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B11000290;Tax benefit fund;0B59000010;Premiums individual policies;1;5,000.00;10,000.00;1040;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;1;4,950.00;9,950.00;1050;0010
+0B49000110;Change in mathematical reserves index linked;0B21000090;Mathematical reserves index linked;1;4,950.00;9,950.00;1050;0010
+0B49000110;Change in mathematical reserves index linked;0B21000090;Mathematical reserves index linked;1;4,950.00;9,950.00;1050;0010
+0B49000110;Change in mathematical reserves index linked;0B21000090;Mathematical reserves index linked;1;4,950.00;9,950.00;1050;0010
+0B11000350;Other receivables;0B59000160;Other technical revenues;0.001;1,158.00;1,500.00;1040;0010
+0B11000390;Unicredit bank account;0B11000350;Other receivables;0.001;1,158.00;1,500.00;1040;0030
+0B11000350;Other receivables;0B59000160;Other technical revenues;0.001;1,000.00;1,842.00;1040;0010
+0B11000400;Intesa bank account;0B11000350;Other receivables;0.001;1,000.00;1,842.00;1040;0030
+0B49000130;Change in claims to be paid reserve;0B21000110;Claims to be paid reserve;0.001;1,000.00;3,000.00;1050;0010
+0B21000110;Claims to be paid reserve;0B49000130;Change in claims to be paid reserve;0.001;1,000.00;3,000.00;1050;0010
+0B49000340;Agent costs;0B21000140;Debts to agents;0.001;20.00;50.00;1040;0010
+0B21000140;Debts to agents;0B11000400;Intesa bank account;0.001;20.00;50.00;1040;0010
+0B49000310;IT systems;0B21000160;Debts to suppliers;0.001;20.00;50.00;1010;0030
+0B21000160;Debts to suppliers;0B11000400;Intesa bank account;0.001;20.00;50.00;1010;0030
+0B49000280;Production bonus;0B21000190;Employees bonus provision;0.001;20.00;50.00;1020;0030
+0B21000190;Employees bonus provision;0B11000390;Unicredit bank account;0.001;20.00;50.00;1020;0030
+0B49000320;General services;0B21000200;Other liabilities;0.001;20.00;50.00;1020;0030
+0B21000200;Other liabilities;0B11000400;Intesa bank account;0.001;20.00;50.00;1020;0030
+0B11000390;Unicredit bank account;0B59000040;Commission income;0.001;100.00;200.00;1040;0020
+0B11000360;Goldman sachs bank account;0B59000050;Dividends;0.001;10.00;20.00;1030;0020
+0B11000360;Goldman sachs bank account;0B59000060;Coupons;0.001;10.00;20.00;1030;0020
+0B11000390;Unicredit bank account;0B59000070;Valuation income;0.001;100.00;200.00;1030;0020
+0B49000100;Change in mathematical reserves unit linked;0B21000080;Mathematical reserves unit linked;0.001;100.00;200.00;1050;0010
+0B49000020;Valutation costs;0B11000370;Jpmorgan bank account;0.001;100.00;200.00;1030;0020
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;0.001;100.00;200.00;1050;0010
+0B11000360;Goldman sachs bank account;0B59000080;Negotiation income;0.001;10.00;20.00;1030;0020
+0B49000030;Negotiation costs;0B11000360;Goldman sachs bank account;0.001;10.00;20.00;1030;0020
+0B11000380;Santander bank account;0B59000090;Interest income on FVTOCI assets;0.001;50.00;60.00;1030;0020
+0B11000390;Unicredit bank account;0B59000100;Interest income on AC assets;0.001;25.00;45.00;1030;0020
+0B11000380;Santander bank account;0B59000110;Rent on properties;0.001;80.00;100.00;1020;0030
+0B11000360;Goldman sachs bank account;0B59000120;Negotiation gains on FVTOCI assets;0.001;150.00;170.00;1030;0020
+0B11000360;Goldman sachs bank account;0B59000130;Negotiation gains on AC assets;0.001;50.00;70.00;1030;0020
+0B11000370;Jpmorgan bank account;0B59000140;Valuation gains on FVTOCI assets;0.001;150.00;180.00;1030;0020
+0B11000370;Jpmorgan bank account;0B59000160;Other technical revenues;0.001;100.00;200.00;1040;0010
+0B49000040;Claims individual policies;0B11000180;Euroequity fund dynamic;1;5,000.00;9,000.00;1040;0010
+0B49000050;Claims collective policies;0B11000190;Eurobond fund balanced;1;5,000.00;9,000.00;1040;0010
+0B49000060;Surrenders individual policies;0B11000200;Eurobond fund opportunity;1;5,000.00;9,000.00;1040;0010
+0B49000070;Surrenders collective policies;0B11000210;Country fund;1;5,000.00;9,000.00;1040;0010
+0B49000080;Annuities individual policies;0B11000220;Opportunity fund;1;5,000.00;9,000.00;1040;0010
+0B49000090;Annuities collective policies;0B11000230;Sector fund;1;5,000.00;9,000.00;1040;0010
+0B49000040;Claims individual policies;0B11000250;Equity step fund;1;5,000.00;9,000.00;1040;0010
+0B49000050;Claims collective policies;0B11000260;Bond short term fund;1;5,000.00;9,000.00;1040;0010
+0B49000060;Surrenders individual policies;0B11000270;Stability fund;1;5,000.00;9,000.00;1040;0010
+0B49000070;Surrenders collective policies;0B11000280;Challenge fund;1;5,000.00;9,000.00;1040;0010
+0B49000080;Annuities individual policies;0B11000290;Tax benefit fund;1;5,000.00;9,000.00;1040;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B21000080;Mathematical reserves unit linked;0B49000100;Change in mathematical reserves unit linked;1;5,000.00;9,000.00;1050;0010
+0B11000390;Unicredit bank account;0B59000170;Claims reimbursed;0.001;1,000.00;1,500.00;1040;0010
+0B59000180;Change in mathematical reserves reinsurance;0B11000100;Mathematical reserves reinsurance;0.001;1,000.00;1,500.00;1050;0010
+0B49000150;Interest costs on FVTOCI assets;0B11000380;Santander bank account;0.001;50.00;60.00;1030;0020
+0B49000160;Interest costs on AC assets;0B11000360;Goldman sachs bank account;0.001;25.00;45.00;1030;0020
+0B49000170;Properties manteinance costs;0B11000380;Santander bank account;0.001;80.00;100.00;1020;0030
+0B49000180;Negotiation losses on FVTOCI assets;0B11000360;Goldman sachs bank account;0.001;150.00;170.00;1030;0020
+0B49000190;Negotiation losses on AC assets;0B11000360;Goldman sachs bank account;0.001;50.00;70.00;1030;0020
+0B49000200;Valuation losses on FVTOCI assets;0B11000370;Jpmorgan bank account;0.001;150.00;180.00;1030;0020
+0B49000220;Acquisition expenses;0B11000400;Intesa bank account;0.001;4.00;6.00;1040;0010
+0B49000230;Rappels;0B11000400;Intesa bank account;0.001;1.00;2.00;1040;0010
+0B49000240;Acquisition fees individual policies;0B11000390;Unicredit bank account;0.001;2.00;5.00;1040;0010
+0B49000260;Securities custody expenses;0B11000390;Unicredit bank account;0.001;1.00;2.00;1020;0030
+0B49000270;Employees remuneration;0B11000390;Unicredit bank account;0.001;200.00;500.00;1020;0030
+0B49000280;Production bonus;0B11000390;Unicredit bank account;0.001;10.00;30.00;1020;0030
+0B49000290;Travel expenses;0B11000390;Unicredit bank account;0.001;1.00;2.00;1010;0030
+0B49000300;Retirement provisions;0B11000390;Unicredit bank account;0.001;1.00;2.00;1020;0030
+0B49000310;IT systems;0B11000400;Intesa bank account;0.001;2.00;3.00;1010;0030
+0B49000320;General services;0B11000400;Intesa bank account;0.001;30.00;70.00;1020;0030
+0B49000330;Consulting services;0B11000390;Unicredit bank account;0.001;5.00;8.00;1010;0030
+0B49000340;Agent costs;0B11000390;Unicredit bank account;0.001;1.00;2.00;1010;0010
+0B49000350;Mailing costs;0B11000400;Intesa bank account;0.001;0.00;1.00;1010;0030
+0B49000360;Marketing costs;0B11000400;Intesa bank account;0.001;4.00;8.00;1010;0030
+0B49000370;Software costs;0B11000400;Intesa bank account;0.001;2.00;3.00;1010;0030
+0B49000380;Other banking costs;0B11000370;Jpmorgan bank account;0.001;4.00;6.00;1010;0030
+0B49000390;Management fees;0B11000390;Unicredit bank account;0.001;1.00;2.00;1040;0020
+0B49000400;Current taxes;0B11000390;Unicredit bank account;0.001;2,200.00;2,700.00;1020;0030

@@ -1,0 +1,138 @@
+<% layout("layouts/boilerplate") %>
+
+<link rel="stylesheet" href="/style/viewdata/postings.css">
+
+<h3 class="my-2">Search postings</h3>
+
+<div class="row" id="inputrow">
+    <div class="col">
+        <div class="topmenu pt-2 px-2 d-flex flex-wrap my-0">
+            <form action="/postings" class="needs-validation d-flex flex-wrap justify-content-around" novalidate id="input-form">
+                <label for="glcode">GL code</label>
+                <input type="text" id="glcode" name="glcode" value="<%=glcode%>" maxlength="10">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" value="<%=description%>" maxlength="50">
+                <label for="startregdate">Start reg date</label>
+                <input type="date" id="startregdate" name="startregdate" value="<%=startregdate%>">
+                <label for="endregdate">End reg date</label>
+                <input type="date" id="endregdate" name="endregdate" value="<%=endregdate%>">
+                <label for="starteffdate">Start eff date</label>
+                <input type="date" id="starteffdate" name="starteffdate" value="<%=starteffdate%>">
+                <label for="endeffdate">End eff date</label>
+                <input type="date" id="endeffdate" name="endeffdate" value="<%=endeffdate%>">
+                <label for="costcenter">Cost center</label>
+                <input type="text" id="costcenter" name="costcenter" value="<%=costcenter%>" maxlength="4">
+                <label for="docnum">Doc number</label>
+                <input type="text" id="docnum" name="docnum" value="<%=docnum%>">
+                <label for="usercode">User code</label>
+                <input type="text" id="usercode" name="usercode" value="<%=usercode%>">
+                <label for="acccenter" id="acccenter_lab" class="d-none">Account center</label>
+                <input type="text" id="acccenter" name="acccenter" value="<%=acccenter%>" maxlength="4" class="d-none">
+                <label for="ordernum" id="ordernum_lab" class="d-none">Policy number</label>
+                <input type="text" id="ordernum" name="ordernum" value="<%=ordernum%>" class="d-none">
+                <label for="paymode" id="paymode_lab" class="d-none">Payment mode</label>
+                <input type="text" id="paymode" name="paymode" value="<%=paymode%>" maxlength="4" class="d-none">
+                <label for="supplcode" id="supplcode_lab" class="d-none">Supplier code</label>
+                <input type="text" id="supplcode" name="supplcode" value="<%=supplcode%>" maxlength="4" class="d-none">
+                <label for="countrycode" id="countrycode_lab" class="d-none">Country code</label>
+                <input type="text" id="countrycode" name="countrycode" value="<%=countrycode%>" maxlength="4" class="d-none">
+                <label for="fs_pos" id="fs_pos_lab" class="d-none">BS/PL</label>
+                <input type="text" id="fs_pos" name="fs_pos" value="<%=fs_pos%>" maxlength="2" class="d-none">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn mx-2" id="toggler">Show options</button>
+                    <button class="btn">Enter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% if (result!=undefined) {%> 
+    <div class="row py-2" id="buttonrow">
+        <div class="col d-flex flex-wrap align-items-center">
+            <button class="btn" id="prevbutton"><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+              </svg></button>
+            <span id="page-label" class="d-flex align-self-center flex-shrink-0">Page <%=Number(page)+1%> of <%=Math.max(Math.ceil(result_n/16), 1)%></span>
+            <% if (result_n <= 16 || 16+page*16>=result_n) {%> 
+                <button class="btn" id="nextbutton" disabled><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                  </svg></button>
+            <% } else { %>
+                <button class="btn" id="nextbutton"><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                  </svg></button>
+            <% } %>
+            <button class="btn" id="togglecol">+</button>
+        </div>
+    </div> 
+    <div class="row"  id="contentrow">
+        <div class="col" id="tablebox">
+            <table>
+                <th>GL code</th>
+                <th>GL description</th>
+                <th>Pos</th>
+                <th>Amount</th>
+                <th>Registration date</th>
+                <th>Effective date</th>
+                <th>Cost center</th>
+                <th>Document number</th>
+                <th>User code</th>
+                <th>Accounting center</th>
+                <th>Policy number</th>
+                <th>Payment mode</th>
+                <th>Supplier code</th>
+                <th>Country code</th>
+                <% for (let i=0; i<16; i++) {%>
+                    <% if (result.length<i+1) { %>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <% } else { %>
+                        <tr>
+                            <td><%=result[i][0]%></td>
+                            <td><%=result[i][1].slice(0,42)%></td>
+                            <td><%=result[i][2]%></td>
+                            <td><%=Number(result[i][3]).toLocaleString("it-IT", {minimumFractionDigits: 2, maximumFractionDigits:2})%></td>
+                            <td><%=result[i][4].toLocaleString("it-IT", {dateStyle:"short"})%></td>
+                            <td><%=result[i][5].toLocaleString("it-IT", {dateStyle:"short"})%></td>
+                            <td><%=result[i][6]%></td>
+                            <td><%=result[i][7]%></td>
+                            <td><%=result[i][8]%></td>
+                            <td><%=result[i][9]%></td>
+                            <td><%=result[i][10]%></td>
+                            <td><%=result[i][11]%></td>
+                            <td><%=result[i][12]%></td>
+                            <td><%=result[i][13]%></td>
+                        </tr>
+                    <% } %> 
+                <% } %> 
+            </table>
+        </div>
+    </div>
+<% } %>
+
+<script>
+    <% if (page!=undefined) { %>
+        let page = <%=page%>;
+        let result_n = <%=result_n%>;
+    <% } else {%>
+        let page = undefined;
+        let result_n = undefined;
+    <% } %>
+</script>
+
+<script src="/js/viewdata/postings.js"></script>

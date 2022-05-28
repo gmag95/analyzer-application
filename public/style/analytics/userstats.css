@@ -1,0 +1,93 @@
+#topmenu {
+    width: 100%;
+    margin: 0em;
+    margin-top: 0.5em;
+    border-top: 0.1em solid grey;
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+}
+
+#content-div {
+    width: 100%;
+    margin: 0em;
+    border: 0.1em solid grey;
+    flex-grow: 1;
+}
+
+h3 {
+    margin:0;
+}
+
+#content-row {
+    flex-grow: 1;
+}
+
+#content-column {
+    display: flex;
+    flex-direction: column;
+}
+
+table, tr, td, th{
+    border: 0.01rem solid black;
+    background-color: ghostwhite;
+    font-size: 0.95em;
+    padding: 0 0.3em;
+    white-space: nowrap;
+    height: 1.5em;
+    text-overflow: ellipsis;
+}
+
+th {
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+
+table a {
+    color: black;
+    text-decoration: none;
+}
+
+table {
+    width:100%;
+}
+
+#postings-table th:first-of-type {
+    width: 13%;
+}
+
+#postings-table th:nth-of-type(2) {
+    width: 22%;
+}
+
+#postings-table th:nth-of-type(3) {
+    width: 10%;
+}
+
+#postings-table th:nth-of-type(4) {
+    width: 17%;
+}
+
+#postings-table th:nth-of-type(5) {
+    width: 15%;
+}
+
+#postings-table th:nth-of-type(6) {
+    width: 15%;
+}
+
+#pivot-table th:first-of-type {
+    width: 30%;
+}
+
+.nav-item:nth-of-type(5) {
+    background-color: #73c2fb;
+}
+
+@media (max-width:1200px) {
+    .tablebox {
+        overflow-x: scroll;
+    }
+}

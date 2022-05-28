@@ -1,0 +1,98 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/style/analytics/department.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="p-2 d-flex flex-wrap" id="topmenu">
+    <h3 class="m-0 align-self-center d-inline text-center">Profit and loss statement by department</h3>
+</div>
+<div id="content-div" class="p-2">
+    <div class="title">
+        <form action="/analytics/departments" class="d-flex flex-wrap">
+            <h4 class="d-inline-block mb-0 align-self-center text-center">Period selected</h4>
+            <select class="form-select mx-2 shadow-none" aria-label="Default select example" name="year">
+                <% for (let year=2017; year< new Date().getFullYear(); year++) {%>
+                    <% if (sel_year!=undefined && sel_year==year) { %> 
+                        <option selected value="<%=year%>"><%=year%></option>
+                    <% } else { %>
+                        <option value="<%=year%>"><%=year%></option>
+                    <% } %>  
+                <% } %>
+                    <% if (sel_year!=undefined && sel_year < new Date().getFullYear()) {%> 
+                        <option value="<%=new Date().getFullYear()%>"><%=new Date().getFullYear()%></option>
+                    <% } else { %> 
+                        <option selected value="<%=new Date().getFullYear()%>"><%=new Date().getFullYear()%></option>
+                    <% } %> 
+            </select>
+            <button class="btn">Update</button>
+        </form>
+    </div>
+    <div class="container col-xl-5 col-lg-9 mt-2">
+        <canvas id="myChart"></canvas>
+        <% if (query_data.length>0) {%> 
+        <span id="result">Period result:<br><%=total_pl%> €</span>
+        <% } else { %>
+        <span id="result">No data available</span> 
+        <% } %> 
+    </div>
+    <script>
+        const data = {
+            labels: <%-JSON.stringify(query_labels)%>,
+            datasets: [{
+                label: 'Department result',
+                data: [<%- query_data%>],
+                backgroundColor: <%-JSON.stringify(query_colors)%>
+            }]
+        };
+    </script>
+    <script>
+        const myChart = new Chart(
+          document.getElementById('myChart'),
+          config = {
+            type: 'doughnut',
+            data: data,
+            options: {
+                plugins: {
+                    tooltip: {enabled: false},
+                    datalabels: {
+                        listeners: {
+                            click: function(context) {
+                                document.location.href = `/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${document.querySelector("select").value }-01-01&endeffdate=${document.querySelector("select").value }-12-31&costcenter=&docnum=&usercode=&acccenter=${query_codes[context.dataIndex]}&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=PL`;
+                            },
+                            enter: function(context) {
+                                context.hovered = true;
+                                return true;
+                            },
+                            leave: function(context) {
+                                context.hovered = false;
+                                return true;
+                            }
+                        },
+                        color: function(context) {
+                            return context.hovered ? "mediumblue" : "black";
+                        },
+                        backgroundColor: "white",
+                        borderWidth: 2,
+                        borderColor: "grey",
+                        padding: 3,
+                        font: {
+                            family: "sans-serif",
+                            weight: "bold",
+                            size: 13
+                        },
+                        textAlign: "center",
+                        formatter: function(value, context) {
+                            return context.chart.data.labels[context.dataIndex]+"\n"+value.toLocaleString("it-IT", {maximumFractionDigits:0})+" €";
+                        },
+                        display: "auto"
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        }
+        );
+    </script>      
+</div>
+ 
+<script>
+    let query_codes = <%-JSON.stringify(query_codes)%>;
+</script>

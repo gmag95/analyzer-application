@@ -1,0 +1,36 @@
+<% layout("layouts/boilerplate") %>
+
+<link rel="stylesheet" href="/style/user/reg-login.css">
+<link rel="stylesheet" href="/style/user/regpage.css">
+
+<div class="row justify-content-center pt-2">
+    <div class="col d-flex justify-content-center">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3 class="mb-0">Register a new account</h3>
+            </div>
+            <div class="card-body d-flex justify-content-center pt-2">
+                <form action="/register" method="post" class="d-flex justify-content-evenly flex-column needs-validation" novalidate>
+                    <label for="email" class="text-center">E-mail</label>
+                    <input type="email" class="form-control shadow-none" id="email" name="username" maxlength="30" required autocomplete="off">
+                    <label for="name" class="text-center">Name</label>
+                    <input type="text" class="form-control shadow-none" id="name" name="name" maxlength="20" required autocomplete="off">
+                    <label for="surname" class="text-center">Surname</label>
+                    <input type="text" class="form-control shadow-none" id="surname" name="surname" maxlength="20" required autocomplete="off">
+                    <label for="grade" class="text-center">Grade code <span class="example-popover" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="4277: Junior Staff, 5680: Senior Staff, 1240: Manager"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                      </svg></span></label>
+                    <input type="text" class="form-control shadow-none" id="grade" name="grade" maxlength="4" required autocomplete="off">
+                    <label for="password" class="text-center">Password</label>
+                    <input type="password" class="form-control shadow-none" id="password" name="password" maxlength="20" required autocomplete="off">
+                    <label for="code" class="text-center">Registration code</label>
+                    <input type="password" class="form-control shadow-none" id="code" name="code" required autocomplete="off">
+                    <button class="btn btn-primary mt-1">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

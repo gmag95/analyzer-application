@@ -1,0 +1,81 @@
+<% layout("layouts/boilerplate") %>
+<div class="p-2 d-flex flex-wrap" id="topmenu">
+    <h3 class="m-0 align-self-center d-inline text-center">Financial statement as of <%=date.slice(-2)+'/'+date.slice(5,7)+'/'+date.slice(0,4)%></h3>
+    <button class="btn order-2 order-md-1" id="toggler">Show options</button>
+    <form action="/statement" <% if (hidden) { %>class="d-none pt-2 order-1 order-md-2 w-100"<% } else { %> class="pt-2 order-1 order-md-2 w-100" <% } %>>
+        <label for="date" class="align-self-center">Select a date:</label>
+        <input type="date" id="date" name="date" value="<%=date%>" class="mx-2">
+        <button class="btn m-0">Enter</button>
+    </form>
+</div>
+<div id="content-div" class="p-2">
+    <div class="title"><h4>Balance sheet</h4></div>
+    <%let counter=0;%>
+    <div id="assets">
+        <table>
+            <th>Gl code/Node</th>
+            <th>GL description</th>
+            <th>Amount</th>
+            <% for (let dat of coa) { %>
+                <tr>
+                    <% if (dat[1]==null) { %>
+                        <td colspan="2"><%= dat[0] %></td>
+                    <% } else {%>
+                    <td><a href="<%=`/postings?glcode=${dat[0]}&description=&startregdate=&endregdate=&starteffdate=&endeffdate=${date.slice(0,10)}&costcenter=&docnum=&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= dat[0] %></a></td>
+                    <td><%= dat[1] %></td>
+                    <% } %>
+                    <td><%= Number(dat[2]).toLocaleString("it-IT", {minimumFractionDigits: 2, maximumFractionDigits:2}) %></td>
+                </tr>
+                <%counter++;%>
+                <% if (dat[0] == "Total assets") { %>
+                    <% break; %>
+                <% } %>
+            <% }; %>
+        </table>
+    </div>
+    <div id="liabilities">
+        <table>
+            <th>Gl code/Node</th>
+            <th>GL description</th>
+            <th>Amount</th>
+            <% for (let dat of coa.slice(counter)) { %>
+                <tr>
+                    <% if (dat[1]==null) { %>
+                        <td colspan="2"><%= dat[0] %></td>
+                    <% } else {%>
+                    <td><a href="<%=`/postings?glcode=${dat[0]}&description=&startregdate=&endregdate=&starteffdate=&endeffdate=${date.slice(0,10)}&costcenter=&docnum=&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= dat[0] %></a></td>
+                    <td><%= dat[1] %></td>
+                    <% } %>
+                    <td><%= Number(dat[2]).toLocaleString("it-IT", {minimumFractionDigits: 2, maximumFractionDigits:2}) %></td>
+                </tr>
+                <%counter++;%>
+                <% if (dat[0] == "Total equity and liabilities") { %>
+                    <% break; %>
+                <% } %>
+            <% }; %>
+        </table>
+    </div>
+    <div class="title"><h4 class="py-2 my-0">Profit and loss</h4></div>
+    <div id="pl">
+        <table>
+            <th>Gl code/Node</th>
+            <th>GL description</th>
+            <th>Amount</th>
+            <% for (let dat of coa.slice(counter)) { %>
+                <tr>
+                    <% if (dat[1]==null) { %>
+                        <td colspan="2"><%= dat[0] %></td>
+                    <% } else {%>
+                    <td><a href="<%=`/postings?glcode=${dat[0]}&description=&startregdate=&endregdate=&starteffdate=&endeffdate=${date.slice(0,10)}&costcenter=&docnum=&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= dat[0] %></a></td>
+                    <td><%= dat[1] %></td>
+                    <% } %>
+                    <td><%= Number(dat[2]).toLocaleString("it-IT", {minimumFractionDigits: 2, maximumFractionDigits:2}) %></td>
+                </tr>
+            <% }; %>
+        </table>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/style/viewdata/statement.css">
+
+<script src="/js/viewdata/statement.js"></script>

@@ -1,0 +1,6 @@
+if (new Date(data[i-1][j]).toLocaleString("it-IT", {dateStyle:"short"}).slice(6,8) == new Date().toLocaleString("it-IT", {dateStyle:"short"}).slice(6,8) && data[i-1][0] != "13") {
+                        let new_el = document.createElement("input");
+                        new_el.setAttribute("type", "checkbox");
+                        new_el.addEventListener("change", checkEvent);
+                        curr_rows[i].children[6].appendChild(new_el);
+                    }

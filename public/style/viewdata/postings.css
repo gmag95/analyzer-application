@@ -1,0 +1,172 @@
+.topmenu {
+    margin: 0.5em 0em;
+    border: 0.1em solid grey;
+}
+
+#inputrow  {
+    background-color: lightgray;
+    color: black;
+}
+
+table {
+    width: 100%;
+}
+
+table, tr, td, th{
+    border: 0.1em solid black;
+    background-color: ghostwhite;
+    font-size: 0.95em;
+    padding: 0em 0.3em;
+    white-space: nowrap;
+    height: 1.5em;
+}
+
+td, th {
+    padding: 0 0.3em;
+}
+
+th {
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+
+#togglecol {
+    margin-left: auto;
+}
+
+#tablebox.overflow {
+    overflow-x: scroll;
+}
+
+#togglecol {
+    width: 2.5em;
+}
+
+tr td:nth-of-type(1), td:nth-of-type(3) {
+    text-align: center;
+}
+
+tr td:nth-of-type(4) {
+    text-align: end;
+}
+
+th {
+    text-align: center;
+}
+
+form button, #togglecol {
+    background-color: #45b1e8!important;
+    color: white!important;
+    border-color: #45b1e8;
+    margin-bottom: 0.5em;
+}
+
+#togglecol {
+    width: 2.4em;
+    height: 2.4em;
+}
+
+#input-form input {
+    width: 14%;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: 0.6em;
+}
+
+#input-form label {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 10.5%;
+    height: 2rem;
+}
+
+#input-form div {
+    width: 74.75%;
+}
+
+#toggler {
+    background-color: grey!important;
+    color: white;
+    width: 8em;
+}
+
+#buttonrow {
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+    padding: 0 0.5em;
+}
+
+#contentrow {
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+    border-bottom: 0.1em solid grey;
+    padding: 0 0.5em 0.5em 0.5em;
+}
+
+.nav-item:nth-of-type(4) {
+    background-color: #73c2fb;
+}
+
+@media (max-width: 1400px) {
+
+    #tablebox {
+        overflow-x: scroll;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    #input-form input {
+        width: 18%;
+    }
+
+    #input-form label {
+        width: 15%;
+    }
+    
+    #input-form div {
+        width: 100%!important;
+    }
+}
+
+@media (max-width: 992px) {
+
+    #input-form input {
+        width: 30%;
+    }
+
+    #input-form label {
+        width: 20%;
+    }
+    
+    #input-form div {
+        width: 50%!important;
+    }
+}
+
+@media (max-width: 768px) {
+    #input-form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #input-form label, #input-form div {
+        width: 100%!important;
+        justify-content: center!important;
+    }
+
+    #input-form div {
+        flex-direction: column;
+        align-items: center!important;
+    }
+
+    #input-form input {
+        width: 70%;
+    }
+}

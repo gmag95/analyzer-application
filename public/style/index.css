@@ -1,0 +1,134 @@
+#topmenu {
+    width: 100%;
+    margin: 0em;
+    margin-top: 0.5em;
+    border-top: 0.1em solid grey;
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+}
+
+#content-div {
+    width: 100%;
+    margin: 0em;
+    border: 0.1em solid grey;
+    flex-grow: 1;
+}
+
+h3 {
+    margin:0;
+}
+
+#content-row {
+    flex-grow: 1;
+}
+
+#content-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-intro {
+    text-align: justify;
+}
+
+table {
+    width: 100%;
+}
+
+table, tr, td, th{
+    border: 0.1em solid black;
+    background-color: ghostwhite;
+    font-size: 0.95em;
+    padding: 0em 0.3em;
+    white-space: nowrap;
+    height: 1.5em;
+}
+
+td, th {
+    padding: 0 0.3em;
+}
+
+th {
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+
+#curr_year_result_title, #latest_uploads_title {
+    text-align: center;
+}
+
+table a {
+    color: black;
+    text-decoration: none;
+}
+
+#balances_box div {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+#balances_box div span span:first-of-type {
+    font-weight: 500;
+}
+
+#balances_box div .outer-span {
+    background-color: ghostwhite;
+    border: 0.1em solid grey;
+    padding: 0.1em;
+    width: 260px;
+    text-align: center;
+}
+
+th:first-of-type {
+    width:33%;
+}
+
+th:nth-of-type(2) {
+    width:25%;
+}
+
+th:nth-of-type(3), th:nth-of-type(4) {
+    width:21%;
+}
+
+.nav-item:first-of-type {
+    background-color: #73c2fb;
+}
+
+#curr_year_result_title {
+    width: 260px;
+    text-align: center;
+}
+
+#index-container {
+    width:95%;
+}
+
+@media (max-width: 768px) {
+    .tablebox {
+        overflow-x: scroll;
+    }
+}
+
+@media (max-width: 1200px) {
+    #balances_box h4 {
+        margin-top: 0.5em;
+        margin-bottom: 0.3em!important;
+    }
+    .container {
+        margin-top: 0!important;
+    }
+
+    #balances_box div:nth-of-type(2) {
+        margin: 0.5em 0;
+    }
+
+    #balances_box, #balances_box div {
+        justify-content: center!important;
+    }
+}

@@ -1,0 +1,5 @@
+footer div {
+    height: 3rem;
+    display: table-cell;
+    vertical-align: middle;
+}

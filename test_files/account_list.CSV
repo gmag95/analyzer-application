@@ -1,0 +1,35 @@
+gl_code;description;category
+0011000000;Bank account;Total assets
+0011000010;Tangible assets;Total assets
+0011000020;Intangible assets;Total assets
+0011000030;Financial activities to P&L;Total assets
+0021000000;Share capital;Total liabilities
+0021000010;Debts;Total liabilities
+0021000020;Other liabilities;Total liabilities
+0021000030;Reserves;Total liabilities
+0021000040;Year profit;Total liabilities
+0059000000;Individual premiums;Profit/loss
+0059000010;Other revenues;Profit/loss
+0059000020;Commissions income;Profit/loss
+0059000030;Collective premiums;Profit/loss
+0049000000;Individual claims;Profit/loss
+0049000010;Collective claims;Profit/loss
+0049000020;General expenses;Profit/loss
+0049000030;Acquisition expenses;Profit/loss
+0B11000000;Bank account;Total assets
+0B11000010;Tangible assets;Total assets
+0B11000020;Intangible assets;Total assets
+0B11000030;Financial activities to P&L;Total assets
+0B21000000;Share capital;Total liabilities
+0B21000010;Debts;Total liabilities
+0B21000020;Other liabilities;Total liabilities
+0B21000030;Reserves;Total liabilities
+0B21000040;Year profit;Total liabilities
+0B59000000;Individual premiums;Profit/loss
+0B59000010;Other revenues;Profit/loss
+0B59000020;Commissions income;Profit/loss
+0B59000030;Collective premiums;Profit/loss
+0B49000000;Individual claims;Profit/loss
+0B49000010;Collective claims;Profit/loss
+0B49000020;General expenses;Profit/loss
+0B49000030;Acquisition expenses;Profit/loss

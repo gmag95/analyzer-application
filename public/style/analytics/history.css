@@ -1,0 +1,59 @@
+#topmenu {
+    width: 100%;
+    margin: 0em;
+    margin-top: 0.5em;
+    border-top: 0.1em solid grey;
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+}
+
+#content-div {
+    width: 100%;
+    margin: 0em;
+    border: 0.1em solid grey;
+    flex-grow: 1;
+}
+
+h3 {
+    margin:0;
+}
+
+#content-row {
+    flex-grow: 1;
+}
+
+#content-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container {
+    flex-grow: 1;
+}
+
+canvas {
+    max-height: 400px;
+}
+
+button {
+    background-color: #45b1e8!important;
+    color: white!important;
+}
+
+#note {
+    margin-left: auto;
+}
+
+.nav-item:nth-of-type(5) {
+    background-color: #73c2fb;
+}
+
+@media (max-width: 390px) {
+    .select-chart {
+        justify-content: center;
+    }
+
+    #note {
+        margin:0.5em 0 0 0;
+    }
+}

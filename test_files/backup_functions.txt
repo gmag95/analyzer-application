@@ -1,0 +1,81 @@
+CREATE OR REPLACE FUNCTION public.return_postings(glcode character varying DEFAULT NULL::character varying, gldesc character varying DEFAULT NULL::character varying, startregdate date DEFAULT NULL::date, endregdate date DEFAULT NULL::date, starteffdate date DEFAULT NULL::date, endeffdate date DEFAULT NULL::date, costcenter character varying DEFAULT NULL::character varying, docnum integer DEFAULT NULL::integer, usercode integer DEFAULT NULL::integer, acccenter character varying DEFAULT NULL::character varying, ordernum integer DEFAULT NULL::integer, paymode character varying DEFAULT NULL::character varying, supplcode character varying DEFAULT NULL::character varying, location character varying DEFAULT NULL::character varying, countrycode character varying DEFAULT NULL::character varying, offset_num integer DEFAULT NULL::integer)
+ RETURNS TABLE(glcode character varying, description character varying, gl_position integer, amount numeric, regdate date, effdate date, costcenter character varying, docnum integer, usercode integer, acccenter character varying, ordernum integer, paymode character varying, supplcode character varying, location character varying, countrycode character varying)
+ LANGUAGE sql
+AS $function$
+	select pos.gl_code, description, position, amount, reg_date, eff_date, cost_center, pos.document_num, user_code, acc_center, order_num, pay_mode, suppl_code, location, country_code 
+	from postings pos join document doc on pos.document_num = doc.document_num join account_list acc on pos.gl_code = acc.gl_code
+	where
+		(case when glcode is not null then pos.gl_code = glcode else true end)
+	and 
+		(case when gldesc is not null then acc.description ilike '%'||gldesc||'%' else true end)
+	and 
+		(case when startregdate is not null then reg_date >= startregdate else true end)
+	and 
+		(case when endregdate is not null then reg_date <= endregdate else true end)
+	and 
+		(case when starteffdate is not null then eff_date >= starteffdate else true end)
+	and 
+		(case when endeffdate is not null then eff_date <= endeffdate else true end)
+	and 
+		(case when costcenter is not null then cost_center = costcenter else true end)
+	and 
+		(case when docnum is not null then pos.document_num = docnum else true end)
+	and
+		(case when usercode is not null then doc.user_code = usercode else true end)
+	and 
+		(case when acccenter is not null then acc_center = acccenter else true end)
+	and 
+		(case when ordernum is not null then order_num = ordernum else true end)
+	and 
+		(case when paymode is not null then pay_mode = paymode else true end)
+	and 
+		(case when supplcode is not null then suppl_code = supplcode else true end)
+	and 
+		(case when location is not null then pos.location = location else true end)
+	and 
+		(case when countrycode is not null then country_code = countrycode else true end)
+	order by eff_date desc, pos.document_num desc, serial_num desc
+	offset case when offset_num is not null then 16*offset_num else 0 end
+	limit 16;
+$function$
+;
+
+
+CREATE OR REPLACE FUNCTION public.return_postings_num(glcode character varying DEFAULT NULL::character varying, gldesc character varying DEFAULT NULL::character varying, startregdate date DEFAULT NULL::date, endregdate date DEFAULT NULL::date, starteffdate date DEFAULT NULL::date, endeffdate date DEFAULT NULL::date, costcenter character varying DEFAULT NULL::character varying, docnum integer DEFAULT NULL::integer, usercode integer DEFAULT NULL::integer, acccenter character varying DEFAULT NULL::character varying, ordernum integer DEFAULT NULL::integer, paymode character varying DEFAULT NULL::character varying, supplcode character varying DEFAULT NULL::character varying, location character varying DEFAULT NULL::character varying, countrycode character varying DEFAULT NULL::character varying)
+ RETURNS integer
+ LANGUAGE sql
+AS $function$
+	select count(*) 
+	from postings pos join document doc on pos.document_num = doc.document_num join account_list acc on pos.gl_code = acc.gl_code
+	where
+		(case when glcode is not null then pos.gl_code = glcode else true end)
+	and 
+		(case when gldesc is not null then acc.description ilike '%'||gldesc||'%' else true end)
+	and 
+		(case when startregdate is not null then reg_date >= startregdate else true end)
+	and 
+		(case when endregdate is not null then reg_date <= endregdate else true end)
+	and 
+		(case when starteffdate is not null then eff_date >= starteffdate else true end)
+	and 
+		(case when endeffdate is not null then eff_date <= endeffdate else true end)
+	and 
+		(case when costcenter is not null then cost_center = costcenter else true end)
+	and 
+		(case when docnum is not null then pos.document_num = docnum else true end)
+	and
+		(case when usercode is not null then doc.user_code = usercode else true end)
+	and 
+		(case when acccenter is not null then acc_center = acccenter else true end)
+	and 
+		(case when ordernum is not null then order_num = ordernum else true end)
+	and 
+		(case when paymode is not null then pay_mode = paymode else true end)
+	and 
+		(case when supplcode is not null then suppl_code = supplcode else true end)
+	and 
+		(case when location is not null then pos.location = location else true end)
+	and 
+		(case when countrycode is not null then country_code = countrycode else true end);
+$function$
+;

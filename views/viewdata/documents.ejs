@@ -1,0 +1,130 @@
+<% layout("layouts/boilerplate") %>
+
+<link rel="stylesheet" href="/style/viewdata/documents.css">
+
+<h3 class="my-2">Search document</h3>
+
+<div class="topmenu pt-2 px-2 d-flex flex-wrap mb-0">
+    <form action="/documents" class="needs-validation d-flex flex-wrap justify-content-around" id="input-form" novalidate>
+        <label for="usercode">User code</label>
+        <input type="text" id="usercode" name="usercode" value="<%=usercode%>" class="mb-2">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="<%=name%>" maxlength="20" class="mb-2">
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" name="surname" value="<%=surname%>" maxlength="20" class="mb-2">
+        <label for="doctype">Doc type</label>
+        <input type="text" id="doctype" name="doctype" value="<%=doctype%>" maxlength="4" class="mb-2">
+        <label for="docnum">Doc number</label>
+        <input type="text" id="docnum" name="docnum" value="<%=docnum%>" class="mb-2">
+        <label for="startdate">Start date</label>
+        <input type="date" id="startdate" name="startdate" value="<%=startdate%>" class="mb-2">
+        <label for="enddate">End date</label>
+        <input type="date" id="enddate" name="enddate" value="<%=enddate%>" class="mb-2">
+        <div class="d-flex">
+            <button class="btn mb-2">Enter</button>
+        </div>
+    </form>
+</div>
+<% if (page!=undefined) {%> 
+    <div class="row py-2" id="buttonrow">
+        <div class="col d-flex flex-wrap">
+            <button class="btn" id="prevbutton"><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+              </svg></button>
+            <span id="page-label" class="d-flex align-self-center flex-shrink-0">Page <%=Number(page)+1%> of <%=Math.max(Math.ceil(result_n/16), 1)%></span>
+            <% if (result_n <= 16 || 16+page*16>=result_n) {%> 
+                <button class="btn" id="nextbutton" disabled><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                  </svg></button>
+            <% } else { %>
+                <button class="btn" id="nextbutton"><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                  </svg></button>
+            <% } %>
+            <form action="/deletedocument?_method=DELETE" method="POST" id="delete-form" class="align-self-center">
+                <button class="btn" id="deletebutton" disabled type="button" data-bs-toggle="modal" data-bs-target="#mymodal">Delete selected</button>
+                <input type="hidden" name="deleteset" id="deleteset">
+                <input type="hidden" name="usercode" id="usercode_del">
+                <input type="hidden" name="name" id="name_del">
+                <input type="hidden" name="surname" id="surname_del">
+                <input type="hidden" name="docnum" id="docnum_del">
+                <input type="hidden" name="doctype" id="doctype_del">
+                <input type="hidden" name="startdate" id="startdate_del">
+                <input type="hidden" name="enddate" id="enddate_del">
+                <input type="hidden" name="page" id="page_del">
+                <input type="hidden" name="result_n" id="result_n_del">
+            </form>
+        </div>
+    </div>
+<div class="row" id="contentrow">
+    <div class="col" id="tablebox">
+    <% if (result!=undefined) { %>
+        <table>
+            <th>User code</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Document number</th>
+            <th>Document type</th>
+            <th>Document date</th>
+            <th></th>
+            <% for (let i=0; i<16; i++) {%>
+                <% if (result.length<i+1) { %>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <% } else { %>
+                    <tr>
+                        <td><%=result[i][0]%></td>
+                        <td><%=result[i][1]%></td>
+                        <td><%=result[i][2]%></td>
+                        <td><%=result[i][3]%></td>
+                        <td><%=result[i][4]%></td>
+                        <td><%=result[i][5].toLocaleString("it-IT", {dateStyle:"short"})%></td>
+                        <% if (result[i][5].toLocaleString("it-IT", {dateStyle:"short"}).slice(6,8) == new Date().toLocaleString("it-IT", {dateStyle:"short"}).slice(6,8)) { %>
+                            <td><input type="checkbox" class="checkbox"></td> 
+                        <% } else {%> 
+                            <td></td>
+                        <% } %> 
+                    </tr>
+                <% } %> 
+            <% } %> 
+        </table>
+    <% } %>  
+    </div>
+</div>
+<% } %> 
+
+<div class="modal fade" id="mymodal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Delete confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn" id="submit-button">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+    <% if (page!=undefined) { %>
+        let page = <%=page%>;
+        let result_n = <%=result_n%>;
+    <% } else {%>
+        let page = undefined;
+        let result_n = undefined;
+    <% } %>
+</script>
+
+<script src="/js/viewdata/documents.js"></script>

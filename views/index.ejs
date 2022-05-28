@@ -1,0 +1,59 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/style/index.css">
+
+<div class="p-2 d-flex flex-wrap" id="topmenu">
+    <h3 class="mb-3 align-self-center d-inline text-center">Accounting analyzer application</h3>
+    <p class="text-intro mb-2">The application allows the user to perform the ordinary bookkeeping operations for a selected Company. The application also provides the possibility of registering provisional amounts in specific GL accounts (0B) with the automatic zeroing of them at the beginning of the next month. Lastly, the analytics section provides graphs and statistics useful to evaluate the past performance of the Company.</p>
+    <p class="text-intro mb-0">After logging-in, the user can upload new postings in the "Upload" section while the "Document" section allows the deletion of documents already uploaded during the current year.</p>
+</div>
+<div id="content-div" class="p-2 d-flex">
+    <div class="row justify-content-center flex-wrap">
+        <div class="container mt-4" id="index-container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-7 tablebox">
+                    <h4 class="mb-2" id="latest_uploads_title">Latest uploads</h4>
+                    <table>
+                        <th>User name</th>
+                        <th>Document number</th>
+                        <th>Document type</th>
+                        <th>Document date</th>
+                        <% for (let row of firstResults) {%>
+                            <tr>
+                                <td><%=row[0].slice(0,25)%></td>
+                                <td>
+                                    <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=&endeffdate=&costcenter=&docnum=${row[1]}&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= row[1] %></a>
+                                </td>
+                                <td><%=row[2]%></td>
+                                <td><%=row[3].toLocaleString("it-IT", {dateStyle:"short"})%></td>
+                            </tr>
+                        <% } %>  
+                    </table>
+                </div>
+                <div class="col-gl-10 col-xl-4 d-flex justify-content-end flex-wrap" id="balances_box">
+                    <h4 class="mb-0" id="curr_year_result_title">Current balances</h4>
+                    <div>
+                        <span class="outer-span">
+                            <span>Assets:</span>&nbsp;<%=Number(secondResults[1][1]).toLocaleString("it-IT", {maximumFractionDigits:0})+" €"%>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="outer-span">
+                            <span>Liabilities:</span>&nbsp;<%=Number(secondResults[2][1]).toLocaleString("it-IT", {maximumFractionDigits:0})+" €"%>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="outer-span">
+                        <span>Profit & loss:</span>&nbsp;
+                        <% if (Number(secondResults[0][1])>0) {%> 
+                            <span style="color:red;"><%=Number(secondResults[0][1]).toLocaleString("it-IT", {maximumFractionDigits:0})+" €"%></span>
+                        <% } else { %>
+                            <span style="color:green;"><%=Number(secondResults[0][1]).toLocaleString("it-IT", {maximumFractionDigits:0})+" €"%></span>
+                        <% } %> 
+                        </span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            

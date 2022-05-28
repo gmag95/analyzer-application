@@ -1,0 +1,185 @@
+.topmenu {
+    margin: 0.5em 0;
+    border: 0.1em solid grey;
+}
+
+table {
+    width: 100%;
+}
+
+table, tr, td, th{
+    border: 0.1em solid black;
+    background-color: ghostwhite;
+    font-size: 0.95em;
+    padding: 0 0.3em;
+    white-space: nowrap;
+    height: 1.5em;
+}
+
+td, th {
+    padding: 0 0.3em;
+}
+
+th {
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+
+#delete-form {
+    margin-left: auto;
+}
+
+th:nth-of-type(1) {
+    width:10%;
+}
+
+th:nth-of-type(2), th:nth-of-type(3) {
+    width:18%;
+}
+
+th:nth-of-type(4), th:nth-of-type(5) {
+    width:18%;
+}
+
+th:nth-of-type(6) {
+    width: 15.5%;
+}
+
+th:nth-of-type(7) {
+    width: 2.5%;
+}
+
+td:nth-of-type(7) {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.col {
+    padding: 0;
+}
+
+#input-form button, #delete-form button, #deletebutton, .modal-footer button:nth-of-type(2) {
+    background-color: #45b1e8!important;
+    color: white!important;
+    border-color: #45b1e8;
+}
+
+.modal-footer button:first-of-type {
+    background-color: grey!important;
+    color: white!important;
+}
+
+#buttonrow {
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+    padding: 0 0.5em;
+}
+
+#contentrow {
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+    border-bottom: 0.1em solid grey;
+    padding: 0 0.5em 0.5em 0.5em;
+}
+
+.nav-item:nth-of-type(3) {
+    background-color: #73c2fb;
+}
+
+#input-form input {
+    width: 14%;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+#input-form label {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 10.5%;
+    height: 2rem;
+}
+
+#input-form div {
+    width: 24.7%;
+}
+
+#input-form button {
+    margin-left: auto;
+}
+
+@media (max-width: 1200px) {
+
+    #input-form input {
+        width: 18%;
+    }
+
+    #input-form label {
+        width: 15%;
+    }
+    
+    #input-form div {
+        width: 66%;
+    }
+}
+
+@media (max-width: 992px) {
+
+    #input-form input {
+        width: 30%;
+    }
+
+    #input-form label {
+        width: 20%;
+    }
+    
+    #input-form div {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #tablebox {
+        overflow-x: scroll;
+    }
+
+}
+
+@media (max-width: 500px) {
+    #input-form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #input-form label, #input-form div {
+        width: 100%;
+    }
+
+    #input-form input {
+        width: 70%;
+    }
+
+    #input-form button {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 378px) {
+
+    #delete-form {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.2em;
+    }
+
+    #buttonrow .col {
+        justify-content: center;
+    }
+
+}

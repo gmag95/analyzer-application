@@ -1,0 +1,61 @@
+#topmenu {
+    width: 100%;
+    margin: 0em;
+    margin-top: 0.5em;
+    border-top: 0.1em solid grey;
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+}
+
+#content-div {
+    width: 100%;
+    margin: 0em;
+    border: 0.1em solid grey;
+}
+
+
+h3 {
+    margin:0;
+}
+
+button {
+    background-color: #45b1e8!important;
+    color: white!important;
+}
+
+.form-select {
+    width: auto;
+}
+
+.container {
+    min-height: auto;
+    position: relative;
+}
+
+#result {
+    position: absolute;
+    width: 100%;
+    top: 51%;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.nav-item:nth-of-type(5) {
+    background-color: #73c2fb;
+}
+
+@media (max-width: 390px) {
+    .title form {
+        justify-content: center;
+    }
+
+    button, .form-select {
+        margin: 0.3em 0;
+    }
+}
+
+@media (max-width: 500px) {
+    #result {
+        display: none;
+    }
+}

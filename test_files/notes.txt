@@ -1,0 +1,1 @@
+gl_code, description, position, amount, reg_date, eff_date, cost_center, document_num, user_code [, acc_center, order_num, pay_mode, suppl_code, location, country_code]

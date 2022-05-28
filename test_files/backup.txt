@@ -1,0 +1,189 @@
+create or replace procedure year_end_close()
+language plpgsql
+as $$
+declare
+	prev_year real := date_part('year', current_date)- integer '1';
+	pl_result numeric(20, 4);
+	document_number integer;
+begin
+	create temp table temp_pl (
+		gl_code varchar(10),
+		position integer,
+		amount numeric(20,4)
+	);
+	insert into temp_pl(gl_code, position, amount)
+	select 
+		po.gl_code,
+		case when position = 40 then 50 else case when position = 50 then 40 else 50 end end,
+		amount*-1
+	from 
+		postings po join account_list al on po.gl_code = al.gl_code
+	where 
+		date_part('year', eff_date) = prev_year and category = 'Profit/loss';
+	select sum(amount) into pl_result from temp_pl;
+	insert into document (user_code, document_date, document_type, company)
+	values (9999, current_date, 'ZZZZ', '1456');
+	select document_num into document_number from document order by document_num desc limit 1;
+	insert into postings(gl_code, position, amount, cost_center, reg_date, acc_center, eff_date, document_num)
+	select temp_pl.gl_code, temp_pl.position, temp_pl.amount, null, current_date, null, current_date, document_number
+	from temp_pl;
+	insert into postings(gl_code, position, amount, cost_center, reg_date, acc_center, eff_date, document_num)
+	values ('0021000040', case when pl_result > 0 then 50 else 40 end, pl_result*-1, null, current_date, null, current_date, document_number),
+	('0021000040', case when pl_result > 0 then 40 else 50 end, pl_result, null, current_date, null, current_date, document_number);
+	if pl_result > 0 then 
+		insert into postings(gl_code, position, amount, cost_center, reg_date, acc_center, eff_date, document_num)
+		values ('0021000010', 50, pl_result*-0.5, null, current_date, null, current_date, document_number),
+		('0021000030', 50, pl_result*-0.5, null, current_date, null, current_date, document_number),
+		('0021000010', 40, pl_result*0.5, null, current_date, null, current_date, document_number),
+		('0011000000', 50, pl_result*-0.5, null, current_date, null, current_date, document_number);
+	else
+		insert into postings(gl_code, position, amount, cost_center, reg_date, acc_center, eff_date, document_num)
+		values ('0021000000', 40, pl_result*-1, null, current_date, null, current_date, document_number);
+	end if;
+end
+$$;
+
+create or replace procedure delete_doc(doc_num integer)
+language plpgsql
+as $$
+declare
+	curr_year real;
+begin
+	select date_part('year', document_date)
+	into curr_year
+	from document
+	where document_num = doc_num;
+	if curr_year = date_part('year', current_date) then
+		with delete_table as (
+			select gl_code, sum(amount) as total
+			from postings
+			where document_num = doc_num
+			group by gl_code
+		)
+		update curr_balances
+		set amount = amount - delete_table.total
+		from delete_table
+		where delete_table.gl_code = curr_balances.gl_code and curr_balances.period = 'current';
+		delete from postings where document_num = doc_num;
+		delete from document where document_num = doc_num;
+	end if;
+end
+$$;
+
+create or replace procedure month_end_close()
+language plpgsql
+as $$
+declare document_number integer;
+begin
+	create temp table temp_0b (
+		gl_code varchar(10),
+		position integer,
+		amount numeric(20,4)
+	);
+	insert into temp_0b(gl_code, position, amount)
+	select 
+		gl_code,
+		case when position = 40 then 50 else case when position = 50 then 40 else 50 end end,
+		amount*-1
+	from 
+		postings
+	where 
+		date_part('year', eff_date) = date_part('year', current_date) and date_part('month', eff_date) = date_part('month', current_date) - integer '1';
+	insert into document (user_code, document_date, document_type, company)
+	values (9999, current_date, 'YYYY', '1456');
+	select document_num into document_number from document order by document_num desc limit 1;
+	insert into postings(gl_code, position, amount, cost_center, reg_date, acc_center, eff_date, document_num)
+	select temp_0b.gl_code, temp_0b.position, temp_0b.amount, null, current_date, null, current_date, document_number
+	from temp_0b;
+	with closing_am as (
+		select gl_code, sum(amount) as total
+		from postings
+		where document_num = document_number
+		group by gl_code
+	)
+	update curr_balances
+	set amount = amount + closing_am.total
+	from closing_am
+	where closing_am.gl_code = curr_balances.gl_code and curr_balances.period = 'current';
+	drop table temp_0b;
+end
+$$;
+
+OLD POSTINGS FUNCTIONS:
+
+CREATE OR REPLACE FUNCTION public.return_postings_num(glcode character varying DEFAULT NULL::character varying, startregdate date DEFAULT NULL::date, endregdate date DEFAULT NULL::date, starteffdate date DEFAULT NULL::date, endeffdate date DEFAULT NULL::date, costcenter character varying DEFAULT NULL::character varying, docnum integer DEFAULT NULL::integer, usercode integer DEFAULT NULL::integer, acccenter character varying DEFAULT NULL::character varying, ordernum integer DEFAULT NULL::integer, paymode character varying DEFAULT NULL::character varying, supplcode character varying DEFAULT NULL::character varying, location character varying DEFAULT NULL::character varying, countrycode character varying DEFAULT NULL::character varying)
+ RETURNS integer
+ LANGUAGE sql
+AS $function$
+	select count(*) 
+	from postings pos join document doc on pos.document_num = doc.document_num join account_list acc on pos.gl_code = acc.gl_code
+	where
+		(case when glcode is not null then pos.gl_code = glcode else true end)
+	and 
+		(case when startregdate is not null then reg_date >= startregdate else true end)
+	and 
+		(case when endregdate is not null then reg_date <= endregdate else true end)
+	and 
+		(case when starteffdate is not null then eff_date >= starteffdate else true end)
+	and 
+		(case when endeffdate is not null then eff_date <= endeffdate else true end)
+	and 
+		(case when costcenter is not null then cost_center = costcenter else true end)
+	and 
+		(case when docnum is not null then pos.document_num = docnum else true end)
+	and
+		(case when usercode is not null then doc.user_code = usercode else true end)
+	and 
+		(case when acccenter is not null then acc_center = acccenter else true end)
+	and 
+		(case when ordernum is not null then order_num = ordernum else true end)
+	and 
+		(case when paymode is not null then pay_mode = paymode else true end)
+	and 
+		(case when supplcode is not null then suppl_code = supplcode else true end)
+	and 
+		(case when location is not null then pos.location = location else true end)
+	and 
+		(case when countrycode is not null then country_code = countrycode else true end);
+$function$
+;
+
+CREATE OR REPLACE FUNCTION public.return_postings(glcode character varying DEFAULT NULL::character varying, startregdate date DEFAULT NULL::date, endregdate date DEFAULT NULL::date, starteffdate date DEFAULT NULL::date, endeffdate date DEFAULT NULL::date, costcenter character varying DEFAULT NULL::character varying, docnum integer DEFAULT NULL::integer, usercode integer DEFAULT NULL::integer, acccenter character varying DEFAULT NULL::character varying, ordernum integer DEFAULT NULL::integer, paymode character varying DEFAULT NULL::character varying, supplcode character varying DEFAULT NULL::character varying, location character varying DEFAULT NULL::character varying, countrycode character varying DEFAULT NULL::character varying, offset_num integer DEFAULT NULL::integer)
+ RETURNS TABLE(glcode character varying, description character varying, gl_position integer, amount numeric, regdate date, effdate date, costcenter character varying, docnum integer, usercode integer, acccenter character varying, ordernum integer, paymode character varying, supplcode character varying, location character varying, countrycode character varying)
+ LANGUAGE sql
+AS $function$
+	select pos.gl_code, description, position, amount, reg_date, eff_date, cost_center, pos.document_num, user_code, acc_center, order_num, pay_mode, suppl_code, location, country_code 
+	from postings pos join document doc on pos.document_num = doc.document_num join account_list acc on pos.gl_code = acc.gl_code
+	where
+		(case when glcode is not null then pos.gl_code = glcode else true end)
+	and 
+		(case when startregdate is not null then reg_date >= startregdate else true end)
+	and 
+		(case when endregdate is not null then reg_date <= endregdate else true end)
+	and 
+		(case when starteffdate is not null then eff_date >= starteffdate else true end)
+	and 
+		(case when endeffdate is not null then eff_date <= endeffdate else true end)
+	and 
+		(case when costcenter is not null then cost_center = costcenter else true end)
+	and 
+		(case when docnum is not null then pos.document_num = docnum else true end)
+	and
+		(case when usercode is not null then doc.user_code = usercode else true end)
+	and 
+		(case when acccenter is not null then acc_center = acccenter else true end)
+	and 
+		(case when ordernum is not null then order_num = ordernum else true end)
+	and 
+		(case when paymode is not null then pay_mode = paymode else true end)
+	and 
+		(case when supplcode is not null then suppl_code = supplcode else true end)
+	and 
+		(case when location is not null then pos.location = location else true end)
+	and 
+		(case when countrycode is not null then country_code = countrycode else true end)
+	order by eff_date desc, pos.document_num desc
+	offset case when offset_num is not null then 10*offset_num else 0 end
+	limit 10;
+$function$
+;

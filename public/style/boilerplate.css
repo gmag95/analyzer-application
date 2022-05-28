@@ -1,0 +1,107 @@
+.main-container {
+    background-color: lightgrey;
+    min-height: 100vh;
+}
+
+.card, .btn, .alert {
+    border-radius: 0;
+}
+
+.flash-el {
+    width:90%;
+}
+
+#imageheader {
+    background-color: white;
+}
+
+.row {
+    width:100%;
+}
+
+#bottomrow {
+    background-color: grey;
+    color: ghostwhite;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
+}
+
+.navbar-container {
+    background-color: #45b1e8;
+}
+
+#navbarNav a, .navbar-brand {
+    color: white!important;
+}
+
+#navbarNav a:hover {
+    background-color: #73c2fb;
+}
+
+.nav-item.dropdown a:focus {
+    background-color: #73c2fb;
+}
+
+.navbar .dropdown-menu {
+    background-color: #73c2fb;
+    border-radius: 0;
+    border-width: 0;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0;
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%28255, 255, 255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");;
+}
+
+.row {
+    --bs-gutter-x: 0;
+}
+
+.btn {
+    box-shadow: none!important;
+    outline: 0;
+}
+
+select {
+    transition: None;
+    border-color: grey!important;
+    border-radius:0!important;
+}
+
+body, #imageheader {
+    background-color:ghostwhite;
+}
+ 
+@media (min-width: 992px) {
+
+    .navbar-brand {
+        display: none;
+    }
+
+}
+
+@media (max-width: 992px) {
+
+    #imageheader {
+        text-align: center;
+    }
+
+    #navbarNav a {
+        padding-left: 1em;
+    }
+
+    .dropdown-item {
+        padding-left: 2em!important;
+    }
+
+    .navbar-container {
+        padding: 0em 0.5em;
+    }
+
+}

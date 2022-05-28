@@ -1,0 +1,210 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/style/analytics/history.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="p-2 d-flex flex-wrap" id="topmenu">
+    <h3 class="m-0 align-self-center d-inline text-center">Historic performance</h3>
+</div>
+<div id="content-div" class="d-flex p-2">
+    <div class="container chart-container">
+        <div class="w-100 d-flex mb-2 flex-wrap select-chart">
+          <button id="bar_button" class="btn" disabled>Bar chart</button><button id="line_button" class="btn mx-2">Line chart</button>
+          <span id="note" class="d-flex align-items-center">Values in millions</span>
+        </div>
+        <canvas id="bar_chart"></canvas>
+        <canvas id="line_chart" class="d-none"></canvas>
+    </div>
+</div>
+
+<script>
+    const barData = {
+    labels: <%-JSON.stringify(labels)%>,
+    datasets: <%-JSON.stringify(datasets)%>
+    };
+</script>
+<script>
+      let pos_function = Chart.Tooltip.positioners.myCustomPositioner = function(elements, eventPosition) {
+          // A reference to the tooltip model
+          const tooltip = this;
+          if(elements && elements[0]) {
+            return {
+              x: elements[0].element.x,
+              y: (elements[0].element.base + elements[0].element.y) / 2
+            };
+          }  else {
+            return "average"
+          }
+      };
+      let chart = new Chart(
+          document.getElementById('bar_chart'),
+            config = {
+            type: 'bar',
+            data: barData,
+            options: {
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                },
+                maintainAspectRatio: false,
+                plugins: {
+                    datalabels: {
+                      listeners: {
+                        click: function(context) {
+                                document.location.href = `/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${new Date().getFullYear()-4+context.dataIndex}-01-01&endeffdate=${new Date().getFullYear()-4+context.dataIndex}-12-31&costcenter=${context.dataset.code}&docnum=&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=PL`;
+                            },
+                            enter: function(context) {
+                                context.hovered = true;
+                                return true;
+                            },
+                            leave: function(context) {
+                                context.hovered = false;
+                                return true;
+                            }
+                      },
+                      color: function(context) {
+                            return context.hovered ? "dodgerblue" : "white";
+                      },
+                      backgroundColor: "rgba(80,80,80,0.5)",
+                      padding: 3,
+                      font: {
+                            family: "sans-serif"
+                      },
+                      formatter: function(value, context) {
+                            if (context.dataset.label.includes("revenue")) {
+                              return "-".concat(value.toLocaleString("it-IT", {maximumFractionDigits:2}));
+                            } else {
+                              return value.toLocaleString("it-IT", {maximumFractionDigits:2});
+                            }
+                      },
+                      display: "auto"
+                    },
+                    tooltip: {
+                      position: 'myCustomPositioner'
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+            });
+</script>
+
+<script>
+  const lineData = {
+  labels: <%-JSON.stringify(labels)%>,
+  datasets: [{
+    label: "Period result",
+    data: <%-JSON.stringify(year_result)%>,
+    pointBackgroundColor: function(value, context) {
+      if (value.raw>0) {
+        return "#de0000"
+      } else {
+        return "green"
+      }
+    },
+    pointBorderColor: function(value, context) {
+      if (value.raw>0) {
+        return "#de0000"
+      } else {
+        return "green"
+      }
+    },
+    pointRadius: 7,
+    pointStyle: "triangle",
+    pointRotation: function(value, context) {
+      if (value.raw>0) {
+        return 180
+      } else {
+        return 0
+      }
+    },
+    pointHoverRadius: 7,
+    fill: false,
+    borderColor: 'grey'
+  }]
+  };
+</script>
+<script>
+   const secondChart = new Chart(
+        document.getElementById('line_chart'),
+        config = {
+          type: 'line',
+          data: lineData,
+          options: {
+            scales: {
+              y: {
+                  min: -60,
+                  max: 60,
+                  reverse: true,
+                  ticks: {
+                    display: false
+                  },
+                  gridLines: {
+                    zeroLineColor: "black",
+                    zeroLineWidth: 2
+                  }
+                }
+              }
+            ,
+            grid: {
+              borderColor: "red"
+            },
+            datasets: {
+              line: {
+                backgroundColor: "grey"
+              }
+            },
+            plugins: {
+              tooltip:{
+                enabled: false
+              },
+              datalabels: {
+                listeners: {
+                  click: function(context) {
+                    document.location.href = `/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${new Date().getFullYear()-4+context.dataIndex}-01-01&endeffdate=${new Date().getFullYear()-4+context.dataIndex}-12-31&costcenter=&docnum=&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=PL`;
+                  },
+                  enter: function(context) {
+                      context.hovered = true;
+                      return true;
+                  },
+                  leave: function(context) {
+                      context.hovered = false;
+                      return true;
+                  }
+                  },
+                color: function(context) {
+                    return context.hovered ? "#000eee" : (context.dataset.data[context.dataIndex]>0) ? "#de0000" : "green";
+                },
+                formatter: function(value, context) {
+                    return value.toLocaleString("it-IT", {maximumFractionDigits:2});
+                },
+                anchor: 'start',
+                align: 'start',
+                offset: 8,
+                font: {
+                    family: "sans-serif",
+                    weight: "600",
+                    size: 13
+                },
+              }
+            }
+          },
+          plugins: [{beforeDatasetDraw: chart => {
+                const ctx = chart.ctx;
+                ctx.save();
+                const xAxis = chart.scales['x'];
+                const yAxis = chart.scales['y'];
+                const y = yAxis.getPixelForValue(0);
+                ctx.beginPath();
+                ctx.moveTo(xAxis.left, y);
+                ctx.lineTo(xAxis.right, y);
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = '#e6e6e6';
+                ctx.stroke();
+                ctx.restore();
+              }}, ChartDataLabels]
+        })
+</script>
+<script src="/js/analytics/history.js"></script>

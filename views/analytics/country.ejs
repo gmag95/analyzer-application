@@ -1,0 +1,45 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/style/analytics/country.css">
+
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
+
+
+<div class="p-2 d-flex flex-wrap" id="topmenu">
+    <h3 class="m-0 align-self-center d-inline text-center">Period result by country</h3>
+</div>
+<div id="content-div" class="p-2">
+    <div class="title pb-2">
+        <form action="/analytics/country" class="d-flex flex-wrap">
+            <h4 class="d-inline-block mb-0 align-self-center text-center">Period selected</h4>
+            <select class="form-select mx-2 shadow-none" aria-label="Default select example" name="year">
+                <% for (let year=2017; year< new Date().getFullYear(); year++) {%>
+                    <% if (sel_year!=undefined && sel_year==year) { %> 
+                        <option selected value="<%=year%>"><%=year%></option>
+                    <% } else { %>
+                        <option value="<%=year%>"><%=year%></option>
+                    <% } %>  
+                <% } %>
+                    <% if (sel_year!=undefined && sel_year < new Date().getFullYear()) {%> 
+                        <option value="<%=new Date().getFullYear()%>"><%=new Date().getFullYear()%></option>
+                    <% } else { %> 
+                        <option selected value="<%=new Date().getFullYear()%>"><%=new Date().getFullYear()%></option>
+                    <% } %> 
+            </select>
+            <button class="btn">Update</button>
+        </form>
+    </div>
+    <div class="map-container">
+        <div id="map" style="width: 100%; height: 500px"></div>
+        <span id="period-result"> <span style="font-weight:500;">Period result: </span><%=total_pl.toLocaleString("it-IT", {maximumFractionDigits:0})%>  €</span>
+    </div>
+</div>
+
+<script>
+    const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+    let json_list = <%-JSON.stringify(json_list)%>;
+    let query_colors = <%-JSON.stringify(query_colors)%>;
+</script>  
+<script src="/js/analytics/country.js"></script>
+

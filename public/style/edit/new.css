@@ -1,0 +1,67 @@
+.btn, .btn:hover, .btn:focus {
+    background-color: #45b1e8;
+    border-color: #45b1e8;
+    color: white;
+}
+
+.card {
+    border: 0;
+}
+
+input {
+    border-radius: 0!important;
+    border: thin solid grey!important;
+    border-radius: 0.15em!important;
+    margin-bottom: 0.6em;
+}
+
+label {
+    margin-bottom: 0.1em;
+}
+
+.card-header, .card-body {
+    background-color: lightgray;
+    border-radius: 0!important;
+}
+
+.card-header {
+    border-top: 0.1em solid grey;
+    border-left: 0.1em solid grey;
+    border-right: 0.1em solid grey;
+    border-bottom: 0;
+}
+
+.card-body {
+    border: 0.1em solid grey;
+}
+
+form, .card {
+    width:50%;
+}
+
+.nav-item:nth-of-type(6) {
+    background-color: #73c2fb;
+}
+
+@media (max-width: 1200px) {
+    form {
+        width:100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .card {
+        width:100%;
+    }
+
+    form {
+        width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+
+    form {
+        width: 100%;
+    }
+}
