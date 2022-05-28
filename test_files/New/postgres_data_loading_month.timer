@@ -1,5 +1,0 @@
-[Unit]
-Description=Analyzer data loading month
-[Timer]
-OnCalendar=*-*~01 9:00:00
-Unit=postgres_data_loading_month.service
