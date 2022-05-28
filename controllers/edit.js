@@ -15,20 +15,20 @@ module.exports.uploadDocument = async (req, res) => {
     let postings_name = "postings_".concat(req.session.passport.user, "_", req.body.identifier, ".csv");
     csv.toDisk("./uploads/".concat(document_name));
     
-    await pool.query("create temp table temp_document (user_code integer not null, document_date date not null, document_type varchar(4) not null, company varchar(4) not null); create temp table temp_postings (gl_code varchar(10) not null, position integer not null, amount numeric(20, 4) not null, cost_center varchar(4), reg_date date not null, acc_center varchar(4), eff_date date not null, order_num integer, discount numeric(5,4), pay_mode varchar(4), suppl_code varchar(4), location varchar(4), country_code varchar(4), document_num integer);")
+    await pool.query("create temp table temp_document (user_code integer not null, document_date date not null, document_type varchar(4) not null, company varchar(4) not null); create temp table temp_postings (gl_code varchar(10) not null, position integer not null, amount numeric(20, 4) not null, cost_center varchar(4), reg_date date not null, acc_center varchar(4), eff_date date not null, order_num integer, discount numeric(5,4), pay_mode varchar(4), suppl_code varchar(4), country_code varchar(4), document_num integer);")
     
     pool.connect(function (err, client, done) {
         let error_status = false;
-        var stream = client.query(copyFrom("\copy temp_postings(gl_code, position, amount, cost_center, reg_date, acc_center, eff_date, order_num, discount, pay_mode, suppl_code, location, country_code) FROM STDIN WITH (FORMAT CSV, HEADER, DELIMITER ';')"));
+        var stream = client.query(copyFrom("\copy temp_postings(gl_code, position, amount, cost_center, reg_date, acc_center, eff_date, order_num, discount, pay_mode, suppl_code, country_code) FROM STDIN WITH (FORMAT CSV, HEADER, DELIMITER ';')"));
         var fileStream = fs.createReadStream(`./uploads/${postings_name}`);
-        fileStream.on('error', () => {if (!error_status) {
+        fileStream.on('error', (err) => {if (!error_status) {
             error_status = true;
-            req.flash("error", "Error: the format of the posting file is not correct"); 
+            req.flash("error", err.message); 
             return res.redirect("/upload");
         }});
-        stream.on('error', () => {if (!error_status) {
+        stream.on('error', (err) => {if (!error_status) {
             error_status = true;
-            req.flash("error", "Error: the format of the posting file is not correct"); 
+            req.flash("error", err.message); 
             return res.redirect("/upload");
         }})
         fileStream.pipe(stream);
@@ -52,7 +52,7 @@ module.exports.uploadDocument = async (req, res) => {
                 fs.unlinkSync(`./uploads/${document_name}`);
             } catch {
                 if (!error_status) {
-                    req.flash("error", err.message);
+                    req.flash("error", "Something went wrong with the deletion of the files");
                     return res.redirect("/upload");
                 }
             }
