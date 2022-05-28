@@ -76,6 +76,7 @@ module.exports.deleteDocument = (req, res) => {
             if (Number(req.body.page)>0 && Number(req.body.result_n)-req.body.deleteset.split(",").length<Number(req.body.page)*10+1) {
                 req.body.page = Number(req.body.page)-Math.ceil(req.body.deleteset.split(",").length/10);
             }
+            req.flash("success", `Successfully deleted the following documents: ${req.body.deleteset.split(",")}`)
             res.redirect(`/documents?usercode=${req.body.usercode}&name=${req.body.name}&surname=${req.body.surname}&docnum=${req.body.docnum}&doctype=${req.body.doctype}&startdate=${req.body.startdate}&enddate=${req.body.enddate}&page=${req.body.page}`);
         })
         .catch(err => {req.flash("error", err.message); return res.redirect("/documents");})
