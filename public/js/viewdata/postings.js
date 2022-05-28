@@ -83,7 +83,7 @@ function getData(move) {
     }
 
     let request = new XMLHttpRequest();
-    request.open('POST', 'http://127.0.0.1:3000/getPostingData', true);
+    request.open('POST', 'getPostingData', true);
     request.setRequestHeader('Content-Type', 'application/json');
 
     request.onload = function() {

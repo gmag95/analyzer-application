@@ -45,7 +45,7 @@ module.exports.viewDocuments = (req, res) => {
                     values: [(req.query.usercode.length==0) ? null : req.query.usercode, (req.query.name.length==0) ? null : req.query.name, (req.query.surname.length==0) ? null : req.query.surname, (req.query.docnum.length==0) ? null : req.query.docnum, (req.query.doctype.length==0) ? null : req.query.doctype, (req.query.startdate==0) ? null : req.query.startdate, (req.query.enddate.length==0) ? null : req.query.enddate, req.query.page || null]
                 }
                 pool.query(query)
-                    .then(result => {res.render("viewdata/documents.ejs", {result: result.rows, page: req.query.page || 0, result_n:result_n.rows[0][0], usercode: req.query.usercode, name:req.query.name, surname:req.query.surname, docnum: req.query.docnum, doctype: req.query.doctype, startdate: req.query.startdate, enddate: req.query.enddate})})
+                    .then(result => {res.render("viewdata/documents.ejs", {result: result.rows, page: req.query.page || 0, result_n:result_n.rows[0][0], usercode: req.query.usercode, name:req.query.name, surname:req.query.surname, docnum: req.query.docnum, doctype: req.query.doctype, startdate: req.query.startdate, enddate: req.query.enddate, address:process.env.ADDRESS})})
                     .catch(err => {
                         if (!error) {
                             req.flash("error", err.message); return res.redirect("/documents");

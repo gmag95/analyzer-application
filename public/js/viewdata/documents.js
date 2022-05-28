@@ -50,7 +50,7 @@ function getData(move) {
     }
 
     let request = new XMLHttpRequest();
-    request.open('POST', 'http://127.0.0.1:3000/getDocumentData', true);
+    request.open('POST', 'getDocumentData', true);
     request.setRequestHeader('Content-Type', 'application/json');
 
     request.onload = function() {
