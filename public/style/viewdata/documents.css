@@ -1,6 +1,9 @@
-.topmenu {
-    margin: 0.5em 0;
+.topmenu, .title-menu {
     border: 0.1em solid grey;
+}
+
+.title-menu {
+    border-bottom: 0;
 }
 
 table {

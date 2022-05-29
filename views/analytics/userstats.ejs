@@ -5,10 +5,10 @@
     <h3 class="m-0 align-self-center d-inline text-center">User statistics</h3>
 </div>
 <div id="content-div" class="p-2">
-            <div class="row justify-content-center flex-wrap">
+        <div class="row justify-content-center flex-wrap">
             <div class="col col-lg-9"><h5>Number of postings by user</h5></div>
-            </div>
-            <div class="row justify-content-center flex-wrap">
+        </div>
+        <div class="row justify-content-center flex-wrap">
             <div class="col col-lg-9 tablebox mb-4">
                 <table id="postings-table">
                     <th>Postings rank</th>
@@ -29,40 +29,41 @@
                     <% } %> 
                 </table>
             </div>
+        </div>
+        <div class="row justify-content-center flex-wrap">
+            <div class="col col-lg-9"><h5>Postings by year</h5>
+        </div>
+        <div class="row justify-content-center flex-wrap">
+            <div class="col col-lg-9 tablebox">
+                <table class="mb-2" id="pivot-table">
+                    <th>User name</th>
+                    <th><%=curr_year-4%></th>
+                    <th><%=curr_year-3%></th>
+                    <th><%=curr_year-2%></th>
+                    <th><%=curr_year-1%></th>
+                    <th><%=curr_year%></th>
+                    <% for (let i=0; i<secondResults.length; i++) {%> 
+                        <tr>
+                            <td><%= secondResults[i][0].slice(0,34) %></td>
+                            <td>
+                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-4}-01-01&endeffdate=${curr_year-4}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][1]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
+                            </td>
+                            <td>
+                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-3}-01-01&endeffdate=${curr_year-3}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][2]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
+                            </td>
+                            <td>
+                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-2}-01-01&endeffdate=${curr_year-2}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][3]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
+                            </td>
+                            <td>
+                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-1}-01-01&endeffdate=${curr_year-1}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][4]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
+                            </td>
+                            <td>
+                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year}-01-01&endeffdate=${curr_year}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][5]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
+                            </td>
+                        </tr>
+                    <% } %> 
+                </table>
             </div>
-            <div class="row justify-content-center flex-wrap">
-            <div class="col col-lg-9"><h5>Postings by year</h5></div>
-            <div class="row justify-content-center flex-wrap">
-                <div class="col col-lg-9 tablebox">
-                    <table class="mb-2" id="pivot-table">
-                        <th>User name</th>
-                        <th><%=curr_year-4%></th>
-                        <th><%=curr_year-3%></th>
-                        <th><%=curr_year-2%></th>
-                        <th><%=curr_year-1%></th>
-                        <th><%=curr_year%></th>
-                        <% for (let i=0; i<secondResults.length; i++) {%> 
-                            <tr>
-                                <td><%= secondResults[i][0].slice(0,34) %></td>
-                                <td>
-                                    <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-4}-01-01&endeffdate=${curr_year-4}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][1]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                                </td>
-                                <td>
-                                    <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-3}-01-01&endeffdate=${curr_year-3}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][2]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                                </td>
-                                <td>
-                                    <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-2}-01-01&endeffdate=${curr_year-2}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][3]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                                </td>
-                                <td>
-                                    <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-1}-01-01&endeffdate=${curr_year-1}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][4]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                                </td>
-                                <td>
-                                    <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year}-01-01&endeffdate=${curr_year}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][5]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                                </td>
-                            </tr>
-                        <% } %> 
-                    </table>
-                </div>
-                </div>
-            </div>
-            </div>
+        </div>
+    </div>
+</div>

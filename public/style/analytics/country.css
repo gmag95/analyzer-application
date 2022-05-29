@@ -11,6 +11,7 @@
     width: 100%;
     margin: 0em;
     border: 0.1em solid grey;
+    flex-grow: 1;
 }
 
 
@@ -45,6 +46,15 @@ form button {
 
 .nav-item:nth-of-type(5) {
     background-color: #73c2fb;
+}
+
+#content-column {
+    display: flex;
+    flex-direction: column;
+}
+
+#content-row {
+    flex-grow: 1;
 }
 
 @media (max-width: 390px) {
