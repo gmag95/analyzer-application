@@ -57,7 +57,7 @@ form button {
     flex-grow: 1;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 405px) {
     .title form {
         justify-content: center;
     }
