@@ -40,9 +40,9 @@ module.exports.viewDocuments = (req, res) => {
         pool.query(query_n)
             .then(result_n => {
                 let query = {
-                    text: "select * from return_doc($1, $2, $3, $4, $5, $6, $7, $8)",
+                    text: "select * from return_doc($1, $2, $3, $4, $5, $6, $7, $8, $9)",
                     rowMode: "array",
-                    values: [(req.query.usercode.length==0) ? null : req.query.usercode, (req.query.name.length==0) ? null : req.query.name, (req.query.surname.length==0) ? null : req.query.surname, (req.query.docnum.length==0) ? null : req.query.docnum, (req.query.doctype.length==0) ? null : req.query.doctype, (req.query.startdate==0) ? null : req.query.startdate, (req.query.enddate.length==0) ? null : req.query.enddate, req.query.page || null]
+                    values: [19, (req.query.usercode.length==0) ? null : req.query.usercode, (req.query.name.length==0) ? null : req.query.name, (req.query.surname.length==0) ? null : req.query.surname, (req.query.docnum.length==0) ? null : req.query.docnum, (req.query.doctype.length==0) ? null : req.query.doctype, (req.query.startdate==0) ? null : req.query.startdate, (req.query.enddate.length==0) ? null : req.query.enddate, req.query.page || null]
                 }
                 pool.query(query)
                     .then(result => {res.render("viewdata/documents.ejs", {result: result.rows, page: req.query.page || 0, result_n:result_n.rows[0][0], usercode: req.query.usercode, name:req.query.name, surname:req.query.surname, docnum: req.query.docnum, doctype: req.query.doctype, startdate: req.query.startdate, enddate: req.query.enddate, address:process.env.ADDRESS})})
@@ -57,9 +57,9 @@ module.exports.viewDocuments = (req, res) => {
 
 module.exports.getDocumentData = (req, res) => {
     let query = {
-        text: "select * from return_doc($1, $2, $3, $4, $5, $6, $7, $8)",
+        text: "select * from return_doc($1, $2, $3, $4, $5, $6, $7, $8, $9)",
         rowMode: "array",
-        values: [(req.body.usercode.length==0) ? null : req.body.usercode, (req.body.name.length==0) ? null : req.body.name, (req.body.surname.length==0) ? null : req.body.surname, (req.body.docnum.length==0) ? null : req.body.docnum, (req.body.doctype.length==0) ? null : req.body.doctype, (req.body.startdate==0) ? null : req.body.startdate, (req.body.enddate.length==0) ? null : req.body.enddate, req.body.page]
+        values: [19, (req.body.usercode.length==0) ? null : req.body.usercode, (req.body.name.length==0) ? null : req.body.name, (req.body.surname.length==0) ? null : req.body.surname, (req.body.docnum.length==0) ? null : req.body.docnum, (req.body.doctype.length==0) ? null : req.body.doctype, (req.body.startdate==0) ? null : req.body.startdate, (req.body.enddate.length==0) ? null : req.body.enddate, req.body.page]
     }
     pool.query(query)
         .then(result => {res.send(result.rows)})
@@ -95,9 +95,9 @@ module.exports.viewPostings = (req, res) => {
         pool.query(query_n)
             .then(result_n => {
                 let query = {
-                    text: "select * from return_postings($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)",
+                    text: "select * from return_postings($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)",
                     rowMode: "array",
-                    values: [(req.query.glcode.length==0) ? null : req.query.glcode, (req.query.description.length==0) ? null : req.query.description, (req.query.startregdate.length==0) ? null : req.query.startregdate, (req.query.endregdate.length==0) ? null : req.query.endregdate, (req.query.starteffdate.length==0) ? null : req.query.starteffdate, (req.query.endeffdate==0) ? null : req.query.endeffdate, (req.query.costcenter.length==0) ? null : req.query.costcenter, (req.query.docnum.length==0) ? null : req.query.docnum, (req.query.usercode.length==0) ? null : req.query.usercode, (req.query.acccenter.length==0) ? null : req.query.acccenter, (req.query.ordernum.length==0) ? null : req.query.ordernum, (req.query.paymode.length==0) ? null : req.query.paymode, (req.query.supplcode.length==0) ? null : req.query.supplcode, (req.query.countrycode.length==0) ? null : req.query.countrycode, (req.query.fs_pos.length==0) ? null : req.query.fs_pos, req.query.page || null]
+                    values: [19, (req.query.glcode.length==0) ? null : req.query.glcode, (req.query.description.length==0) ? null : req.query.description, (req.query.startregdate.length==0) ? null : req.query.startregdate, (req.query.endregdate.length==0) ? null : req.query.endregdate, (req.query.starteffdate.length==0) ? null : req.query.starteffdate, (req.query.endeffdate==0) ? null : req.query.endeffdate, (req.query.costcenter.length==0) ? null : req.query.costcenter, (req.query.docnum.length==0) ? null : req.query.docnum, (req.query.usercode.length==0) ? null : req.query.usercode, (req.query.acccenter.length==0) ? null : req.query.acccenter, (req.query.ordernum.length==0) ? null : req.query.ordernum, (req.query.paymode.length==0) ? null : req.query.paymode, (req.query.supplcode.length==0) ? null : req.query.supplcode, (req.query.countrycode.length==0) ? null : req.query.countrycode, (req.query.fs_pos.length==0) ? null : req.query.fs_pos, req.query.page || null]
                 }
                 pool.query(query)
                     .then(result => {res.render("viewdata/postings.ejs", {result: result.rows, page: req.query.page || 0, result_n:result_n.rows[0][0], glcode: req.query.glcode, description:req.query.description, startregdate:req.query.startregdate, endregdate: req.query.endregdate, starteffdate: req.query.starteffdate, endeffdate: req.query.endeffdate, costcenter: req.query.costcenter, docnum: req.query.docnum, usercode: req.query.usercode, acccenter: req.query.acccenter, ordernum: req.query.ordernum, paymode: req.query.paymode, supplcode: req.query.supplcode, countrycode: req.query.countrycode, fs_pos: req.query.fs_pos})})
@@ -112,9 +112,9 @@ module.exports.viewPostings = (req, res) => {
 
 module.exports.getPostingData = (req, res) => {
     let query = {
-        text: "select * from return_postings($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)",
+        text: "select * from return_postings($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)",
         rowMode: "array",
-        values: [(req.body.glcode.length==0) ? null : req.body.glcode, (req.body.description.length==0) ? null : req.body.description, (req.body.startregdate.length==0) ? null : req.body.startregdate, (req.body.endregdate.length==0) ? null : req.body.endregdate, (req.body.starteffdate.length==0) ? null : req.body.starteffdate, (req.body.endeffdate==0) ? null : req.body.endeffdate, (req.body.costcenter.length==0) ? null : req.body.costcenter, (req.body.docnum.length==0) ? null : req.body.docnum, (req.body.usercode.length==0) ? null : req.body.usercode, (req.body.acccenter.length==0) ? null : req.body.acccenter, (req.body.ordernum.length==0) ? null : req.body.ordernum, (req.body.paymode.length==0) ? null : req.body.paymode, (req.body.supplcode.length==0) ? null : req.body.supplcode, (req.body.countrycode.length==0) ? null : req.body.countrycode, (req.body.fs_pos.length==0) ? null : req.body.fs_pos, req.body.page]
+        values: [19, (req.body.glcode.length==0) ? null : req.body.glcode, (req.body.description.length==0) ? null : req.body.description, (req.body.startregdate.length==0) ? null : req.body.startregdate, (req.body.endregdate.length==0) ? null : req.body.endregdate, (req.body.starteffdate.length==0) ? null : req.body.starteffdate, (req.body.endeffdate==0) ? null : req.body.endeffdate, (req.body.costcenter.length==0) ? null : req.body.costcenter, (req.body.docnum.length==0) ? null : req.body.docnum, (req.body.usercode.length==0) ? null : req.body.usercode, (req.body.acccenter.length==0) ? null : req.body.acccenter, (req.body.ordernum.length==0) ? null : req.body.ordernum, (req.body.paymode.length==0) ? null : req.body.paymode, (req.body.supplcode.length==0) ? null : req.body.supplcode, (req.body.countrycode.length==0) ? null : req.body.countrycode, (req.body.fs_pos.length==0) ? null : req.body.fs_pos, req.body.page]
     }
     pool.query(query)
         .then(result => {res.send(result.rows)})

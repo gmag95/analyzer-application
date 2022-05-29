@@ -62,7 +62,7 @@ function getData(move) {
         let data = eval(this.response);
         let res_n = data.length;
         let curr_rows = document.querySelectorAll("tr");
-        for (let i=1; i<17; i++) {
+        for (let i=1; i<20; i++) {
             if (i<=res_n) {
                 for (let j=0; j<6; j++) {
                     if (j!=5) {
@@ -91,9 +91,9 @@ function getData(move) {
         }
         document.getElementById("page_del").value = page;
         let pageLabel = document.getElementById("page-label");
-        pageLabel.innerText=`Page ${page+1} of ${Math.ceil(result_n/16)}`;
+        pageLabel.innerText=`Page ${page+1} of ${Math.ceil(result_n/19)}`;
         var nextButton = document.getElementById("nextbutton");
-        if (16+page*16>=result_n) {
+        if (19+page*19>=result_n) {
             nextButton.disabled=true;
         } else {
             nextButton.disabled=false;

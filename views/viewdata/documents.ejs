@@ -31,8 +31,8 @@
             <button class="btn" id="prevbutton"><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                 <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
               </svg></button>
-            <span id="page-label" class="d-flex align-self-center flex-shrink-0">Page <%=Number(page)+1%> of <%=Math.max(Math.ceil(result_n/16), 1)%></span>
-            <% if (result_n <= 16 || 16+page*16>=result_n) {%> 
+            <span id="page-label" class="d-flex align-self-center flex-shrink-0">Page <%=Number(page)+1%> of <%=Math.max(Math.ceil(result_n/19), 1)%></span>
+            <% if (result_n <= 19 || 19+page*19>=result_n) {%> 
                 <button class="btn" id="nextbutton" disabled><svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" fill="grey" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                     <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                   </svg></button>
@@ -67,7 +67,7 @@
             <th>Document type</th>
             <th>Document date</th>
             <th></th>
-            <% for (let i=0; i<16; i++) {%>
+            <% for (let i=0; i<19; i++) {%>
                 <% if (result.length<i+1) { %>
                     <tr>
                         <td></td>
