@@ -159,7 +159,7 @@ module.exports.history = (req, res) => {
                 } else if (row[1]=="Misc." && row[3]>0) {
                     datasets[2]["data"].push(Number((row[3]/1000000).toFixed(2)));
                 }
-                year_result[Math.floor(i/6)]+=Number(Number(row[3]/1000000).toFixed(2));
+                year_result[Math.floor(i/6)]+=row[3]/1000000;
                 i++;
             }
             res.render("analytics/history.ejs", {datasets, labels, year_result});
