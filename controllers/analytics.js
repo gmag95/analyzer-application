@@ -147,17 +147,17 @@ module.exports.history = (req, res) => {
             let i=0;
             for (let row of result.rows) {
                 if (row[1]=="Investment" && row[3]<=0) {
-                    datasets[4]["data"].push(Math.abs((row[3]/1000000).toFixed(2)));
+                    datasets[4]["data"].push(Math.abs((row[3]/1000000)));
                 } else if (row[1]=="Investment" && row[3]>0) {
-                    datasets[1]["data"].push(Number((row[3]/1000000).toFixed(2)));
+                    datasets[1]["data"].push((row[3]/1000000));
                 } else if (row[1]=="Insurance" && row[3]<=0) {
-                    datasets[3]["data"].push(Math.abs((row[3]/1000000).toFixed(2)));
+                    datasets[3]["data"].push(Math.abs((row[3]/1000000)));
                 } else if (row[1]=="Insurance" && row[3]>0) {
-                    datasets[0]["data"].push(Number((row[3]/1000000).toFixed(2)));
+                    datasets[0]["data"].push((row[3]/1000000));
                 } else if (row[1]=="Misc." && row[3]<=0) {
-                    datasets[5]["data"].push(Math.abs((row[3]/1000000).toFixed(2)));
+                    datasets[5]["data"].push(Math.abs((row[3]/1000000)));
                 } else if (row[1]=="Misc." && row[3]>0) {
-                    datasets[2]["data"].push(Number((row[3]/1000000).toFixed(2)));
+                    datasets[2]["data"].push((row[3]/1000000));
                 }
                 year_result[Math.floor(i/6)]+=row[3]/1000000;
                 i++;
