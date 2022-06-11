@@ -1,6 +1,6 @@
 # Accounting analyzer application
 
-[![Accounting-analyzer](https://github.com/gmag95/personalpage/blob/main/public/img/screenshots/analyzer.webp?raw=true)](https://accounting-analyzer.herokuapp.com/)
+[![Accounting-analyzer](https://github.com/gmag95/personalpage/blob/main/public/img/screenshots/analyzer.webp?raw=true)](https://www.accounting-analyzer.tk/)
 
 This application allows the ordinary bookkeeping operations for a selected company.
 
