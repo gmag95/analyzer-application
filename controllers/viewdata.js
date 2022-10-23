@@ -2,27 +2,30 @@ const {pool} = require('../db/index');
 var moment = require('moment'); 
 
 module.exports.statement = async (req, res) => {
+        let query = {
+            text: "select * from render_current_coa()"
+        }
+        pool.query(query)
+            .then(result => res.render("viewdata/statement.ejs", {ChartOfAccounts:result.rows, date: moment().format().slice(0,10)}))
+            .catch(err => {res.status(err.status).render("error", {err});})
+}
+
+module.exports.getStatementData = async (req, res) => {
     if (req.query.date && req.query.date!=moment().format().slice(0,10)) {
         let query = {
             text: "select * from render_custom_coa($1)",
-            rowMode: "array",
             values: [req.query.date]
         }
         pool.query(query)
-            .then(result => res.render("viewdata/statement.ejs", {coa:result.rows, date: req.query.date, hidden:false}))
+            .then(result => res.send(result.rows))
             .catch(err => {req.flash("error", err.message); return res.redirect("/statement");})
     }
     else {
         let query = {
-            text: "select * from render_current_coa()",
-            rowMode: "array"
-        }
-        var hidden = true;
-        if (req.query.date) {
-            hidden = false;
+            text: "select * from render_current_coa()"
         }
         pool.query(query)
-            .then(result => res.render("viewdata/statement.ejs", {coa:result.rows, date: moment().format().slice(0,10), hidden}))
+            .then(result => res.send(result.rows))
             .catch(err => {res.status(err.status).render("error", {err});})
     }
 }

@@ -27,17 +27,21 @@ h3 {
     flex-direction: column;
 }
 
-.chart-container {
-    flex-grow: 1;
-}
-
-canvas {
-    max-height: 400px;
-}
-
 button {
     background-color: #45b1e8!important;
     color: white!important;
+}
+
+svg {
+    stroke-width: 0.15;
+}
+
+.axes text {
+    font-size: 0.35rem;
+}
+
+svg a text, .balanceTooltip text, .barTooltip text {
+    font-size: 0.4rem;
 }
 
 #note {
@@ -46,6 +50,73 @@ button {
 
 .nav-item:nth-of-type(5) {
     background-color: #73c2fb;
+}
+
+#line_chart a text:hover {
+    fill: blue!important;
+}
+
+.balanceTooltip, .barTooltip {
+    pointer-events: none;
+}
+
+.balanceTooltip rect, .barTooltip rect {
+    fill: #eee;
+    stroke: gray;
+    stroke-width: 0.8;
+}
+
+#line_chart .line {
+    stroke-width: 1;
+    stroke: grey;
+}
+
+#line_chart .x-axis .tick line, #bar_chart .y-axis .tick:not(:last-of-type)  line{
+    stroke-dasharray: 2 2;
+}
+
+#line_chart .x-axis .tick:first-of-type line, #line_chart .y-axis .tick:last-of-type line {
+    stroke-dasharray: 0 0;
+}
+
+#line_chart .y-axis .tick:nth-of-type(5) line {
+    stroke-width: 1;
+    stroke: #f0f0f0;
+}
+
+a {
+    text-decoration: none;
+}
+
+#bar_chart .x-axis .tick line, #bar_chart .x-axis .tick:nth-child(odd) text {
+    display: none;
+}
+
+#bar_chart .axes text, #line_chart .axes text, .legendBox span {
+    user-select: none;
+}
+
+.barGroup text:hover, #bar_chart .yearResultBalance:hover {
+    fill: blue!important;
+}
+
+#bar_chart_legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.greyedOut {
+    fill: grey!important;
+}
+
+.striked {
+    text-decoration: line-through;
+}
+
+.legendBox rect {
+    stroke: ghostwhite;
+    stroke-width: 3;
 }
 
 @media (max-width: 405px) {

@@ -53,6 +53,59 @@ button {
     flex-grow: 1;
 }
 
+.slice {
+    stroke: white;
+    fill-opacity: .8;
+    stroke-width: 2;
+}
+
+#pie-chart rect {
+    fill: rgb(255, 255, 255);
+    stroke: gray;
+    stroke-width: 2;
+    fill-opacity: 0.9;
+}
+
+a {
+    text-decoration: none;
+}
+
+a text:hover {
+    fill: blue;
+}
+
+.year-result text {
+    font-size: 1.3rem;
+}
+
+#chart_legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.legendBox rect {
+    stroke: ghostwhite;
+    stroke-width: 3;
+}
+
+.legendBox span, .year-result text {
+    user-select: none;
+}
+
+.greyedOut {
+    fill: grey!important;
+}
+
+.striked {
+    text-decoration: line-through;
+}
+
+.legendBox rect {
+    transition: 1s;
+    transition-property: fill;
+}
+
 @media (max-width: 405px) {
     .title form {
         justify-content: center;
