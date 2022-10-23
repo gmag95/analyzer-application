@@ -15,7 +15,11 @@ function validateNumber (req, res, next) {
 
 router.get("/departments", validateNumber, analytics.department);
 
+router.get("/getDepartmentData", validateNumber, analytics.getDepartmentData);
+
 router.get("/country", validateNumber, analytics.country);
+
+router.get("/getCountryData", validateNumber, analytics.getCountryData);
 
 router.get("/history", analytics.history);
 

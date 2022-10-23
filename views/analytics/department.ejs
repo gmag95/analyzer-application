@@ -11,89 +11,27 @@
         <form action="/analytics/departments" class="d-flex flex-wrap">
             <h4 class="d-inline-block mb-0 align-self-center text-center">Period selected</h4>
             <select class="form-select mx-2 shadow-none" aria-label="Default select example" name="year">
-                <% for (let year=2017; year< new Date().getFullYear(); year++) {%>
-                    <% if (sel_year!=undefined && sel_year==year) { %> 
+                <% for (let year=new Date().getFullYear()-5; year< new Date().getFullYear()+1; year++) {%>
+                    <% if (year == new Date().getFullYear()) { %> 
                         <option selected value="<%=year%>"><%=year%></option>
                     <% } else { %>
                         <option value="<%=year%>"><%=year%></option>
                     <% } %>  
                 <% } %>
-                    <% if (sel_year!=undefined && sel_year < new Date().getFullYear()) {%> 
-                        <option value="<%=new Date().getFullYear()%>"><%=new Date().getFullYear()%></option>
-                    <% } else { %> 
-                        <option selected value="<%=new Date().getFullYear()%>"><%=new Date().getFullYear()%></option>
-                    <% } %> 
             </select>
-            <button class="btn">Update</button>
+            <button class="btn" type="button" id="updateButton">Update</button>
         </form>
     </div>
     <div class="container graph-container mt-2">
-        <canvas id="myChart"></canvas>
-        <% if (query_data.length>0) {%> 
-        <span id="result">Period result:<br><%=total_pl%> €</span>
-        <% } else { %>
-        <span id="result">No data available</span> 
-        <% } %> 
+        <div id="chart_legend"></div>
+        <svg id="pie-chart" width = "100%" viewBox="0 0 500 500"></svg>
     </div>
-    <script>
-        const data = {
-            labels: <%-JSON.stringify(query_labels)%>,
-            datasets: [{
-                label: 'Department result',
-                data: [<%- query_data%>],
-                backgroundColor: <%-JSON.stringify(query_colors)%>
-            }]
-        };
-    </script>
-    <script>
-        const myChart = new Chart(
-          document.getElementById('myChart'),
-          config = {
-            type: 'doughnut',
-            data: data,
-            options: {
-                plugins: {
-                    tooltip: {enabled: false},
-                    datalabels: {
-                        listeners: {
-                            click: function(context) {
-                                document.location.href = `/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${document.querySelector("select").value }-01-01&endeffdate=${document.querySelector("select").value }-12-31&costcenter=&docnum=&usercode=&acccenter=${query_codes[context.dataIndex]}&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=PL`;
-                            },
-                            enter: function(context) {
-                                context.hovered = true;
-                                return true;
-                            },
-                            leave: function(context) {
-                                context.hovered = false;
-                                return true;
-                            }
-                        },
-                        color: function(context) {
-                            return context.hovered ? "mediumblue" : "black";
-                        },
-                        backgroundColor: "white",
-                        borderWidth: 2,
-                        borderColor: "grey",
-                        padding: 3,
-                        font: {
-                            family: "sans-serif",
-                            weight: "bold",
-                            size: 13
-                        },
-                        textAlign: "center",
-                        formatter: function(value, context) {
-                            return context.chart.data.labels[context.dataIndex]+"\n"+value.toLocaleString("it-IT", {maximumFractionDigits:0})+" €";
-                        },
-                        display: "auto"
-                    }
-                }
-            },
-            plugins: [ChartDataLabels]
-        }
-        );
-    </script>      
+  
 </div>
  
 <script>
-    let query_codes = <%-JSON.stringify(query_codes)%>;
+    let queryResult = <%-JSON.stringify(queryResult)%>;
 </script>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/js/analytics/department.js"></script>

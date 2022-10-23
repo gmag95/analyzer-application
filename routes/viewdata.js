@@ -36,6 +36,8 @@ function validateDate (req, res, next) {
 
 router.get("/statement", validateDate, wrapAsync(viewData.statement));
 
+router.get("/getStatementData", validateDate, wrapAsync(viewData.getStatementData));
+
 router.get("/documents", viewData.viewDocuments)
 
 router.post("/getDocumentData", validateDocumentSearch, viewData.getDocumentData)

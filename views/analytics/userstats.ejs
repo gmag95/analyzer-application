@@ -19,12 +19,12 @@
                     <th>Postings loaded</th>
                     <% for (let row of firstResults) {%> 
                         <tr>
-                            <td><%= row[0] %></td>
-                            <td><%= row[1].slice(0,26) %></td>
-                            <td><a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=&endeffdate=&costcenter=&docnum=&usercode=${row[2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= row[2] %></a></td>
-                            <td><%= row[3].slice(0,21) %></td>
-                            <td><%= Number(row[4]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></td>
-                            <td><%= Number(row[5]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></td>
+                            <td><%= row.postings_rank %></td>
+                            <td><%= row.fullname.slice(0,26) %></td>
+                            <td><a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=&endeffdate=&costcenter=&docnum=&usercode=${row.user_code}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= row.user_code %></a></td>
+                            <td><%= row.grade_description.slice(0,21) %></td>
+                            <td><%= Number(row.doc_count).toLocaleString("it-IT", {maximumFractionDigits:0}) %></td>
+                            <td><%= Number(row.postings_count).toLocaleString("it-IT", {maximumFractionDigits:0}) %></td>
                         </tr>
                     <% } %> 
                 </table>
@@ -36,34 +36,17 @@
         <div class="row justify-content-center flex-wrap">
             <div class="col col-lg-9 tablebox">
                 <table class="mb-2" id="pivot-table">
-                    <th>User name</th>
-                    <th><%=curr_year-4%></th>
-                    <th><%=curr_year-3%></th>
-                    <th><%=curr_year-2%></th>
-                    <th><%=curr_year-1%></th>
-                    <th><%=curr_year%></th>
-                    <% for (let i=0; i<secondResults.length; i++) {%> 
-                        <tr>
-                            <td><%= secondResults[i][0].slice(0,34) %></td>
-                            <td>
-                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-4}-01-01&endeffdate=${curr_year-4}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][1]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                            </td>
-                            <td>
-                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-3}-01-01&endeffdate=${curr_year-3}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][2]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                            </td>
-                            <td>
-                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-2}-01-01&endeffdate=${curr_year-2}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][3]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                            </td>
-                            <td>
-                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year-1}-01-01&endeffdate=${curr_year-1}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][4]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                            </td>
-                            <td>
-                                <a href="<%=`/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${curr_year}-01-01&endeffdate=${curr_year}-12-31&costcenter=&docnum=&usercode=${firstResults[i][2]}&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=`%>"><%= Number(secondResults[i][5]).toLocaleString("it-IT", {maximumFractionDigits:0}) %></a>
-                            </td>
-                        </tr>
-                    <% } %> 
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    let firstResults = <%-JSON.stringify(firstResults)%>;
+    let secondResults = <%-JSON.stringify(secondResults)%>;
+</script>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-collection.v1.min.js"></script>
+<script src="/js/analytics/userstats.js"></script>
