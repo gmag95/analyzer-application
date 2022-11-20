@@ -207,9 +207,7 @@ function drawBarChart(modQueryResult, step) {
 
         d3.select(".x-axis .domain").remove();
 
-        drawPeriodResults();
-
-    } 
+    }
 
     d3.select(".elementsGroup").selectAll("g.barGroup")
         .data(modQueryResult).join(
@@ -292,6 +290,8 @@ function drawBarChart(modQueryResult, step) {
     }
         
     bar_data = [];
+    
+    drawPeriodResults(modQueryResult, all_zero);
 
 }
 
@@ -405,19 +405,32 @@ function transformBarData(queryResult, step) {
     return bar_data;
 }
 
-function drawPeriodResults () {
+function drawPeriodResults (modQueryResult, all_zero) {
 
     let periodResultY = height - 10;
 
-    d3.selectAll("#bar_chart .x-axis .tick:nth-child(even)").append("a")
-        .attr("href", (d, i) => `/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${input_data[i][0]}-01-01&endeffdate=${input_data[i][0]}-12-31&costcenter=&docnum=&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=PL`)
-        .append("text").attr("class", "yearResultBalance")
-        .text((d, i) => textLabelFormatter(input_data[i][1]) + " €")
-        .attr("y", periodResultY)
-        .style("fill", (d, i) => input_data[i][1] > 0 ? "#de0000" : "green");
+    let periodResults = d3.rollups(modQueryResult, v => d3.sum(v, d => d.balance), d => d.year_sel).sort((a, b) => d3.ascending(a[0], b[0]));
 
-    d3.select("#bar_chart .x-axis").append("text")
+    if (!all_zero) {
+
+        d3.selectAll("#bar_chart .x-axis .tick:nth-child(even)").append("a")
+        .data(periodResults)
+        .attr("href", (d, i) => `/postings?glcode=&description=&startregdate=&endregdate=&starteffdate=${d[0]}-01-01&endeffdate=${d[0]}-12-31&costcenter=&docnum=&usercode=&acccenter=&ordernum=&paymode=&supplcode=&countrycode=&fs_pos=PL`)
+        .append("text").attr("class", "yearResultBalance")
+        .text((d, i) => textLabelFormatter(d[1]) + " €")
+        .attr("y", periodResultY)
+        .style("fill", (d, i) => d[1] == 0 ? "#000" : (d[1] > 0 ? "#de0000" : "#008000"));
+
+        d3.select("#bar_chart .x-axis").append("text")
         .text("Year result").attr("x", 15)
         .attr("y", periodResultY)
         .style("fill", "black");
+
+    } else {
+
+        d3.selectAll(".yearResultBalance")
+            .text(textLabelFormatter(0) + " €")
+            .style("fill", "#000");
+
+    }
 }
