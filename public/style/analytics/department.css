@@ -123,25 +123,33 @@ a text:hover {
 }
 
 @media (min-width: 768px) {
-    .graph-container {
+    #chart_legend {
         width:80%;
+    }
+
+    #pie-chart {
+        max-height: 600px;
     }
 }
 
 @media (min-width: 992px) {
-    .graph-container {
+    #chart_legend {
         width:70%;
     }
 }
 
 @media (min-width: 1200px) {
-    .graph-container {
+    #chart_legend {
         width:60%;
+    }
+
+    #pie-chart {
+        max-height: 500px;
     }
 }
 
 @media (min-width: 1400px) {
-    .graph-container {
+    #chart_legend {
         width:40%;
     }
 }

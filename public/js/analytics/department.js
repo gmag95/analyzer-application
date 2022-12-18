@@ -188,6 +188,8 @@ function updateChart(queryResult, change) {
 
     let updated_year_result_abs = d3.sum(queryResult, d => d.pieValue);
 
+    year_result = d3.sum(queryResult, d => d.center_balance);
+
     d3.select(".box").selectAll("g.boxes").data(pie_dep(queryResult)).join(enter => enter.append("g").each(function() {
 
         d3.select(this).append("rect");
