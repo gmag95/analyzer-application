@@ -45,14 +45,18 @@ module.exports.country = (req, res) => {
                 }
                 })
                 total_pl+=Number(row[1]);
-                if (row[1]<=0) {
-                    query_colors.push([row[0], row[5],`rgb(${green_color[0]}, ${green_color[1]}, ${green_color[2]})`])
+
+                if (Number(row[1])==0) {
+                    query_colors.push([row[0], row[5],"rgb(195, 195, 195)"]);
+                }
+                else if (row[1]<0) {
+                    query_colors.push([row[0], row[5],`rgb(${green_color[0]}, ${green_color[1]}, ${green_color[2]})`]);
                     if (green_color[0]+45<255) {
                         green_color[0]=green_color[0]+45;
                         green_color[2]=green_color[2]+45;
                     }
                 } else {
-                    query_colors.push([row[0], row[5], `rgb(${red_color[0]}, ${red_color[1]}, ${red_color[2]})`])
+                    query_colors.push([row[0], row[5], `rgb(${red_color[0]}, ${red_color[1]}, ${red_color[2]})`]);
                     red_color[1]=red_color[1]-30;
                     red_color[2]=red_color[2]-30;
                 }
@@ -148,14 +152,17 @@ module.exports.getCountryData = (req, res) => {
                 }
                 })
                 total_pl+=Number(row[1]);
-                if (row[1]<=0) {
-                    query_colors.push([row[0], row[5],`rgb(${green_color[0]}, ${green_color[1]}, ${green_color[2]})`])
+                if (Number(row[1])==0) {
+                    query_colors.push([row[0], row[5],"rgb(195, 195, 195)"]);
+                }
+                else if (row[1]<0) {
+                    query_colors.push([row[0], row[5],`rgb(${green_color[0]}, ${green_color[1]}, ${green_color[2]})`]);
                     if (green_color[0]+45<255) {
                         green_color[0]=green_color[0]+45;
                         green_color[2]=green_color[2]+45;
                     }
                 } else {
-                    query_colors.push([row[0], row[5], `rgb(${red_color[0]}, ${red_color[1]}, ${red_color[2]})`])
+                    query_colors.push([row[0], row[5], `rgb(${red_color[0]}, ${red_color[1]}, ${red_color[2]})`]);
                     red_color[1]=red_color[1]-30;
                     red_color[2]=red_color[2]-30;
                 }

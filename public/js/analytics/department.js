@@ -43,8 +43,6 @@ function drawChart () {
         .data( pie_dep(queryResult) ).join("g").attr("class", "sliceG")
         .attr("transform", "translate(250,250)");
 
-    console.log(g_departments);
-
     g_departments.append("path").attr("class", "slice")
         .attr("d", d => arc_dep(d))
         .style("fill", d => colorScale_dep(d.data.center_balance))
@@ -61,7 +59,7 @@ function drawBoxes(pie_dep, arc_dep) {
 
     const g_boxes = d3.select("#pie-chart").append("g")
                         .attr("class", "box").selectAll("g.boxes")
-                        .data(pie_dep(queryResult)).join("g").attr("class", "boxes")
+                        .data(pie_dep(queryResult.filter(el => el.center_balance != 0))).join("g").attr("class", "boxes")
                         .attr("transform", "translate(250,250)");
 
     g_boxes.append("rect").attr("height", 60)
@@ -190,7 +188,7 @@ function updateChart(queryResult, change) {
 
     year_result = d3.sum(queryResult, d => d.center_balance);
 
-    d3.select(".box").selectAll("g.boxes").data(pie_dep(queryResult)).join(enter => enter.append("g").each(function() {
+    d3.select(".box").selectAll("g.boxes").data(pie_dep(queryResult.filter(el => el.center_balance != 0))).join(enter => enter.append("g").each(function() {
 
         d3.select(this).append("rect");
         let a_el = d3.select(this).append("a");
